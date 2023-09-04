@@ -1,0 +1,31 @@
+form: flex-pages
+id: 'tmp://forms/session/5b5d003ad87b88e4df77374119e41673'
+unique_id: 5b5d003ad87b88e4df77374119e41673
+url: '/pages/content/nouveau-test/:add'
+user:
+  username: pm_primo
+  email: pierrem.primo@gmail.com
+timestamps:
+  created: 1693298336
+  updated: 1693298336
+data: null
+files: {  }
+object:
+  type: pages
+  key: content/nouveau-test
+  storage_key: ''
+  timestamp: 0
+  serialized:
+    __META: {  }
+    storage_key: ''
+    parent_key: content
+    order: false
+    folder: nouveau-test
+    template: project
+    lang: ''
+    root: false
+    route: /content
+    name: project
+    header:
+      title: 'Nouveau Test'
+    frontmatter: "title: 'Nouveau Test'\n"
