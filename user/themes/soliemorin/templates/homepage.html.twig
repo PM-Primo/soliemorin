@@ -2,33 +2,32 @@
 
 {% block body %}
 
+    <div class="slideshow__container">
 
-    {% for project in page.find('/projets').children.published.order("date", "desc") %}
-        {{ project.title }}<br>
-        {{ project.header.custom.caption }}<br>
-        {{ project.header.custom.type }}<br>
-        <br>
+        {% for project in page.find('/projets').children.published.order("date", "desc") %}
+            <div class="slideshow__project">
 
-        <div class="slideshow__container">
-            {% for slide in project.header.custom.images %}
-                <div class="slideshow__project_slide">
-                    {{slide.alt}}<br>
+            {{ project.title }}<br>
+            {{ project.header.custom.caption }}<br>
+            {{ project.header.custom.type }}<br>
+            <br>
 
-                    {% set imageUrl = (slide.image|first).name %}
-                    <img src="{{project.media[imageUrl].url(false)}}" alt='Toto' class="slideshow__image">
+                {% for slide in project.header.custom.images %}
+                    <div class="slideshow__project_slide">
+                        {% set imageUrl = (slide.image|first).name %}
+                        <img src="{{project.media[imageUrl].url(false)}}" alt='Toto' class="slideshow__image">
+                    </div>
+                {% endfor %}
+            </div>
 
-                </div>
-            {% endfor %}
-        </div>
-        <div>
-            <a href="javascript:void(0);" class="slideshow__prev" onclick="plusSlides(-1)">&lt-</a>
-            <a href="javascript:void(0);" class="slideshow__next" onclick="plusSlides(1)">-&gt</a>
-        </div>
+        {% endfor %}
 
-        <br>
-
-    {% endfor %}
-
+    </div>
+    <div>
+        <a href="javascript:void(0);" class="slideshow__prvproject" onclick="plusProject(-1)">&lt-</a>
+        <a href="javascript:void(0);" class="slideshow__nxtslide" onclick="plusSlides(1)">Slide</a>
+        <a href="javascript:void(0);" class="slideshow__nxtproject" onclick="plusProject(1)">-&gt</a>
+    </div>
     
 {% endblock body %}
 

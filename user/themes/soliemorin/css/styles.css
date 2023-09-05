@@ -58,6 +58,12 @@ body {
     height:350px;
 }
 
+.slideshow__project{
+    width:100%;
+    height: 100%;
+    display: none;
+}
+
 .slideshow__project_slide{
     width: 100%;
     height: 100%;
