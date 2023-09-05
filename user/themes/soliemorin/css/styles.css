@@ -1,0 +1,55 @@
+/*==============   FONTS    ==================*/
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@font-face {
+    font-family: 'Barabbas';
+    src: url('../fonts/Barabbas-Display.woff') format('woff'),
+        url('../fonts/Barabbas-Display.woff2') format('woff');
+        font-weight: normal;
+    font-style: normal;
+}
+
+:root{
+    --header-height: 3.5rem;
+
+    /*========== Colors ==========*/
+    --main-blue: #004edf;
+    --main-white: #ffffff;
+
+
+    /*========== Font and typography ==========*/
+
+    --body-font: "Spectral", serif;
+    --title-font: "Barabbas", sans-serif;
+    --h1-font-size: 3rem;
+    --normal-font-size: .938rem;
+    --icons-font-size: 1.8rem;
+    
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    -moz-osx-font-smoothing: grayscale; 
+    text-rendering: optimizeLegibility; 
+    -webkit-font-smoothing: antialiased; 
+    -moz-font-smoothing: antialiased; 
+    font-smoothing: antialiased; 
+    font-smooth: never;
+    -moz-font-smooth: never;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+    color: black;
+    height: 100%;
+    background-color: var(--main-white);
+}
+

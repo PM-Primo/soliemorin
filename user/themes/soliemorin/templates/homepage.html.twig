@@ -1,0 +1,32 @@
+{% include 'partials/header.html.twig' %}
+
+{% block body %}
+
+
+    {% for project in page.find('/projets').children.published.order("date", "desc") %}
+        {{ project.title }}<br>
+        {{ project.header.custom.caption }}<br>
+        {{ project.header.custom.type }}<br>
+        <br>
+
+        <div class="slideshow__container">
+            {% for slide in project.header.custom.images %}
+                <div class="slideshow__project_slide">
+                    {{slide.alt}}<br>
+
+                    {% set imageUrl = (slide.image|first).name %}
+                    <img src="{{project.media[imageUrl].url(false)}}" alt='Toto'>
+
+                </div>
+            {% endfor %}
+        </div>
+
+        <br>
+
+    {% endfor %}
+
+    
+{% endblock body %}
+
+
+{% include 'partials/footer.html.twig' %}

@@ -1,0 +1,26 @@
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+<!DOCTYPE html>
+<html lang="{{ html_lang }}">
+<head>
+{% block head %}
+    <meta charset="utf-8" />
+    <title>Solie Morin</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'partials/metadata.html.twig' %}
+
+    <link rel="stylesheet" type="text/css" href="{{ url('theme://css/styles.css') }}?{{ date().format('U') }}"/>
+    
+{% endblock head %}
+</head>
+
+<body>
+
+{% block header %}
+
+    <div>
+        <h1>Solie Morin</h1>
+    </div>
+
+{% endblock %}
