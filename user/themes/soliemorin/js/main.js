@@ -1,11 +1,24 @@
-console.log("coucou la team")
+let slideIndex = 1;
+console.log("slide index : "+slideIndex)
+showSlides(slideIndex);
 
-var data; //Contient les données récupérées par le JSON
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("slideshow__project_slide");
 
-function getBaseUrl() {
-    url = window.location.href;
-    var re = new RegExp(/^.*\//);
-    baseUrl = re.exec(url)
-    return baseUrl;
+    if (n > slides.length){
+        slideIndex = 1
+    }
+    if (n < 1){
+        slideIndex = slides.length
+    }
+
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slides[slideIndex-1].style.display = "block";
 }
 
+function plusSlides(n){
+    showSlides(slideIndex += n)
+}

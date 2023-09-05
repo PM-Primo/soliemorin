@@ -53,3 +53,17 @@ body {
     background-color: var(--main-white);
 }
 
+.slideshow__container{
+    width:350px;
+    height:350px;
+}
+
+.slideshow__project_slide{
+    width: 100%;
+    height: 100%;
+    display:none;
+}
+
+.slideshow__image{
+    height: 100%;
+}

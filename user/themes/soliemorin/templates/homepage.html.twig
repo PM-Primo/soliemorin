@@ -15,10 +15,14 @@
                     {{slide.alt}}<br>
 
                     {% set imageUrl = (slide.image|first).name %}
-                    <img src="{{project.media[imageUrl].url(false)}}" alt='Toto'>
+                    <img src="{{project.media[imageUrl].url(false)}}" alt='Toto' class="slideshow__image">
 
                 </div>
             {% endfor %}
+        </div>
+        <div>
+            <a href="javascript:void(0);" class="slideshow__prev" onclick="plusSlides(-1)">&lt-</a>
+            <a href="javascript:void(0);" class="slideshow__next" onclick="plusSlides(1)">-&gt</a>
         </div>
 
         <br>
