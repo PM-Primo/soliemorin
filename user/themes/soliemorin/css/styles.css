@@ -52,13 +52,38 @@ html {
 body {
     font-family: var(--body-font);
     font-size: var(--normal-font-size);
-    color: black;
+    color: var(--main-blue);
     height: 100%;
     background-color: var(--main-white);
 }
 
 h1{
     font-family: var(--title-font);
+    font-size: var(--h1-font-size);
+    text-transform: uppercase;
+}
+
+.header{
+    width: 100%;
+    padding: .4rem 1rem .4rem 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__infos{
+    text-decoration: none;
+}
+
+.header__infos:hover{
+    text-decoration: underline;
+}
+
+.main__wrapper{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .slideshow__container{
@@ -80,4 +105,30 @@ h1{
 
 .slideshow__image{
     height: 100%;
+}
+
+.informations__container{
+    height: 0 ;
+    /* height: 100%; */
+    width: 100%;
+    position: absolute;
+    top:0;
+    background-color: var(--main-blue);
+    color: var(--main-white);
+    top: 100%;
+    z-index: 2;
+    transition: all 1000ms;
+    overflow: hidden;
+}
+
+.informations__on{
+    height: 100%;
+    top: 0
+}
+
+.informations__close{
+    color: var(--main-white);
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
 }

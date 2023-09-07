@@ -4,7 +4,7 @@
 
     <div class="slideshow__container">
 
-        {% for project in page.find('/projets').children.published.order("date", "desc") %}
+        {% for project in page.find('/projets').children.published.order("title", "asc") %}
             <div class="slideshow__project">
 
             {{ project.title }}<br>
@@ -27,6 +27,19 @@
         <a href="javascript:void(0);" class="slideshow__prvproject" onclick="plusProject(-1)">&lt-</a>
         <a href="javascript:void(0);" class="slideshow__nxtslide" onclick="plusSlides(1)">Slide</a>
         <a href="javascript:void(0);" class="slideshow__nxtproject" onclick="plusProject(1)">-&gt</a>
+    </div>
+
+    <div id="informations__container" class="informations__container">
+
+        <a href="javascript:void(0);" onclick="removeInfos()" class="informations__close">[X]</a>
+
+        <div clas="informations__column">
+            {{page.find('/informations').header.custom.firstcol|markdown}}
+        </div>
+        <div clas="informations__column">
+            {{page.find('/informations').header.custom.secondcol|markdown}}
+        </div>
+
     </div>
     
 {% endblock body %}

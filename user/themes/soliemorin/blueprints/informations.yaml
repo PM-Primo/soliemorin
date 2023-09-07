@@ -1,0 +1,85 @@
+title: PLUGIN_ADMIN.DEFAULT
+
+rules:
+  slug:
+    pattern: '[a-zA-Zа-яA-Я0-9_\-]+'
+    min: 1
+    max: 200
+
+form:
+  validation: loose
+
+  fields:
+
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        content:
+          type: tab
+          title: PLUGIN_ADMIN.CONTENT
+
+          fields:
+            header.published:
+              type: toggle
+              toggleable: true
+              label: PLUGIN_ADMIN.PUBLISHED
+              help: PLUGIN_ADMIN.PUBLISHED_HELP
+              highlight: 1
+              size: medium
+              options:
+                1: PLUGIN_ADMIN.YES
+                0: PLUGIN_ADMIN.NO
+              validate:
+                type: bool
+
+            header.title:
+              type: text
+              autofocus: true
+              style: vertical
+              label: Titre
+
+            header.custom.firstcol:
+              type: markdown
+              label: "<strong>Première colonne d'informations</strong> – Intertitre ( ##Intertitre ). Italique ( _texte_ ). Lien ( [Texte](https://monurl.fr) ).<br> Pour revenir à la ligne, faire deux espaces puis retour à la ligne. <br> Puces pour les listes : '+', '-' ou '*' "
+           
+            header.custom.secondcol:
+              type: markdown
+              label: "<strong>Seconde colonne d'informations</strong> – Intertitre ( ##Intertitre ). Italique ( _texte_ ). Lien ( [Texte](https://monurl.fr) ).<br> Pour revenir à la ligne, faire deux espaces puis retour à la ligne. <br> Puces pour les listes : '+', '-' ou '*' "
+
+        advanced:
+          type: tab
+          title: PLUGIN_ADMIN.ADVANCED
+
+          fields:
+            columns:
+              type: columns
+              fields:
+                column1:
+                  type: column
+                  fields:
+
+                    settings:
+                      type: section
+                      title: PLUGIN_ADMIN.SETTINGS
+                      underline: true
+
+                    folder:
+                      type: text
+                      label: PLUGIN_ADMIN.FOLDER_NAME
+                      validate:
+                        rule: slug
+
+                    route:
+                      type: parents
+                      label: PLUGIN_ADMIN.PARENT
+                      classes: fancy
+
+                    name:
+                      type: select
+                      classes: fancy
+                      label: PLUGIN_ADMIN.PAGE_FILE
+                      help: PLUGIN_ADMIN.PAGE_FILE_HELP
+                      default: default
+                      data-options@: '\Grav\Common\Page\Pages::pageTypes'

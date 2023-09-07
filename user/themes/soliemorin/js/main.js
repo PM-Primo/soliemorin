@@ -1,8 +1,10 @@
+
+// FONCTIONNEMENT DU SLIDESHOW
+
 let slideIndex = 1;
 let projectIndex = 1;
 let projects = document.getElementsByClassName("slideshow__project");
 
-console.log("slide index : "+slideIndex);
 showProject(projectIndex);
 showSlides(slideIndex);
 
@@ -48,4 +50,20 @@ function plusProject(n){
     showProject(projectIndex += n);
     slideIndex = 1;
     showSlides(slideIndex);
+}
+
+function direBonjour(){
+    console.log('Bonjour')
+}
+
+// AFFICHAGE DES INFORMATIONS
+
+function displayInfos(){
+    let infoBox = document.getElementById("informations__container");
+    infoBox.classList.add("informations__on");
+}
+
+function removeInfos(){
+    let infoBox = document.getElementById("informations__container");
+    infoBox.classList.remove("informations__on");
 }
