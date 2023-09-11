@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <div class="slideshow__container">
+    {# <div class="slideshow__container">
 
         {% for project in page.find('/projets').children.published.order("title", "asc") %}
             <div class="slideshow__project">
@@ -22,22 +22,44 @@
 
         {% endfor %}
 
-    </div>
+    </div> #}
     <div>
-        <a href="javascript:void(0);" class="slideshow__prvproject" onclick="plusProject(-1)">&lt-</a>
+        <a href="javascript:void(0);" class="slideshow__prvproject" onclick="slideLeft()">&lt-</a>
         <a href="javascript:void(0);" class="slideshow__nxtslide" onclick="plusSlides(1)">Slide</a>
-        <a href="javascript:void(0);" class="slideshow__nxtproject" onclick="plusProject(1)">-&gt</a>
+        <a href="javascript:void(0);" class="slideshow__nxtproject" onclick="slideRight()">-&gt</a>
+    </div>
+
+    <div class="slideshow__container">
+        <div class="slideshow__inner" id="slideshow__inner">
+            {% for project in page.find('/projets').children.published.order("title", "asc") %}
+                <div class="slideshow__project">
+                    <div class="slideshow__project_inner">
+                        {% for slide in project.header.custom.images %}
+                            {% set imageUrl = (slide.image|first).name %}
+                            <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image">
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
     </div>
 
     <div id="informations__container" class="informations__container">
 
-        <a href="javascript:void(0);" onclick="removeInfos()" class="informations__close">[X]</a>
-
-        <div clas="informations__column">
-            {{page.find('/informations').header.custom.firstcol|markdown}}
+        <div class="informations__header">
+            <h1 class="informations__logo">Solie Morin</h1>
+            <a href="javascript:void(0);" onclick="removeInfos()" class="informations__close">[X]</a>
         </div>
-        <div clas="informations__column">
-            {{page.find('/informations').header.custom.secondcol|markdown}}
+
+        <div class="informations__content_wrapper">            
+            <div class="informations__first_column">
+                {{page.find('/informations').header.custom.firstcol|markdown}}
+            </div>
+            <div class="informations__second_column">
+                {{page.find('/informations').header.custom.secondcol|markdown}}
+            </div>
         </div>
 
     </div>
