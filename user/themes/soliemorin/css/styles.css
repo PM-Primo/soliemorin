@@ -117,7 +117,7 @@ h1{
 
 
 .slideshow__container{
-    height:70%;
+    height:70vh;
     width: 100%;
     overflow: hidden;    
 }
@@ -138,11 +138,11 @@ h1{
 .slideshow__project_inner{
     display: flex;
     flex-direction: column;
+    transition: 1000ms;
 }
 
 .slideshow__image{
-    /* width: 100%; */
-    height:100%;
+    height: 70vh;
     display: block;
 }
 
