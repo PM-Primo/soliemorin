@@ -1,56 +1,6 @@
 
 // FONCTIONNEMENT DU SLIDESHOW
 
-// let slideIndex = 1;
-// let projectIndex = 1;
-// let projects = document.getElementsByClassName("slideshow__project");
-
-// showProject(projectIndex);
-// showSlides(slideIndex);
-
-// function showProject(n) {
-//     let i;
-
-//     if (n > projects.length){
-//         projectIndex = 1
-//     }
-//     if (n < 1){
-//         projectIndex = projects.length
-//     }
-
-//     for (i = 0; i < projects.length; i++) {
-//       projects[i].style.display = "none";
-//     }
-//     projects[projectIndex-1].style.display = "block";
-// }
-
-// function showSlides(n) {
-//     let i;
-
-//     let slides = projects[projectIndex-1].getElementsByClassName("slideshow__project_slide");
-
-//     if (n > slides.length){
-//         slideIndex = 1
-//     }
-//     if (n < 1){
-//         slideIndex = slides.length
-//     }
-
-//     for (i = 0; i < slides.length; i++) {
-//       slides[i].style.display = "none";
-//     }
-//     slides[slideIndex-1].style.display = "block";
-// }
-
-// function plusSlides(n){
-//     showSlides(slideIndex += n)
-// }
-
-// function plusProject(n){
-//     showProject(projectIndex += n);
-//     slideIndex = 1;
-//     showSlides(slideIndex);
-// }
 
 let projects = document.getElementsByClassName("slideshow__project");
 let currentProject = 0;
@@ -77,20 +27,47 @@ function slideLeft(){
 
 }
 
-
-
 function slideUp(){
     let project = projects[currentProject];
     let slides = project.getElementsByClassName("slideshow__image")
     let currentSlide = imagePositions[0][currentProject];
+    let imageSlider = project.getElementsByClassName("slideshow__project_inner")[0];
 
     if(currentSlide < slides.length-1){
         imagePositions[1][currentProject] += slides[currentSlide].offsetHeight;
         imagePositions[0][currentProject]++;
-        let imageSlider = project.getElementsByClassName("slideshow__project_inner")[0];
         imageSlider.style.transform = "translateY(-"+imagePositions[1][currentProject]+"px)"
     }
-    console.log(imagePositions)
+    else{
+        imagePositions[1][currentProject] = 0;
+        imagePositions[0][currentProject] = 0;
+        imageSlider.style.transform = "translateY(0px)";
+    }
+
+}
+
+function slideDown(){
+    let project = projects[currentProject];
+    let slides = project.getElementsByClassName("slideshow__image")
+    let currentSlide = imagePositions[0][currentProject];
+    let imageSlider = project.getElementsByClassName("slideshow__project_inner")[0];
+
+    if(currentSlide > 0){
+        imagePositions[1][currentProject] -= slides[currentSlide].offsetHeight;
+        imagePositions[0][currentProject]--;
+        imageSlider.style.transform = "translateY(-"+imagePositions[1][currentProject]+"px)"
+    }
+    else{
+        let totalLength = 0;
+        for(i = 0; i < slides.length-1; i++){
+            totalLength += slides[i].offsetHeight;
+        }
+        imagePositions[1][currentProject] = totalLength;
+        imagePositions[0][currentProject] = slides.length-1;
+        
+        imageSlider.style.transform = "translateY(-"+ imagePositions[1][currentProject] +"px)";
+    }
+
 }
 
 
@@ -104,4 +81,27 @@ function displayInfos(){
 function removeInfos(){
     let infoBox = document.getElementById("informations__container");
     infoBox.classList.remove("informations__on");
+}
+
+
+// RACCOURCIS CLAVIER
+window.addEventListener("keydown", checkKeyPressed, false);
+
+function checkKeyPressed(e) {
+
+    if (e.keyCode == "37") {
+        slideLeft();
+    }
+    if (e.keyCode == "39") {
+        slideRight();
+    }
+    if (e.keyCode == "40") {
+        slideUp();
+    }
+    if (e.keyCode == "38") {
+        slideDown();
+    }
+
+    console.log(imagePositions);
+
 }
