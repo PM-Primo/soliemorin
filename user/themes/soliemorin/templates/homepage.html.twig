@@ -2,33 +2,6 @@
 
 {% block body %}
 
-    {# <div class="slideshow__container">
-
-        {% for project in page.find('/projets').children.published.order("title", "asc") %}
-            <div class="slideshow__project">
-
-            {{ project.title }}<br>
-            {{ project.header.custom.caption }}<br>
-            {{ project.header.custom.type }}<br>
-            <br>
-
-                {% for slide in project.header.custom.images %}
-                    <div class="slideshow__project_slide">
-                        {% set imageUrl = (slide.image|first).name %}
-                        <img src="{{project.media[imageUrl].url(false)}}" alt='Toto' class="slideshow__image">
-                    </div>
-                {% endfor %}
-            </div>
-
-        {% endfor %}
-
-    </div> #}
-    <div>
-        <a href="javascript:void(0);" class="slideshow__prvproject" onclick="slideLeft()">&lt-</a>
-        <a href="javascript:void(0);" class="slideshow__nxtslide" onclick="slideUp()">Slide</a>
-        <a href="javascript:void(0);" class="slideshow__nxtproject" onclick="slideRight()">-&gt</a>
-    </div>
-
     <div class="slideshow__container">
         <div class="slideshow__inner" id="slideshow__inner">
             {% for project in page.find('/projets').children.published.order("title", "asc") %}

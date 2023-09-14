@@ -96,7 +96,7 @@ h1{
 
 
 .slideshow__container{
-    height:70vh;
+    height:85vh;
     width: 100%;
     overflow: hidden;
     position: relative; 
@@ -123,12 +123,16 @@ h1{
 }
 
 .slideshow__image{
-    display: block;
+    /* display: block; */
     object-fit: contain;
     width: auto;
-    height: 70vh;
+    height: 85vh;
+    display: none;
 }
 
+.slideshow__image_on{
+    display: block;
+}
 
 .slideshow__overlay{
     position: absolute;
@@ -142,14 +146,14 @@ h1{
 #slideshow__overlay_left, #slideshow__overlay_right{
     width: 20%;
     height: 100%;
-    background-color: green;
+    /* background-color: green; */
     opacity: 40%;
 }
 
 #slideshow__overlay_middle{
     width:60%;
     height: 100%;
-    background-color: red;
+    /* background-color: red; */
     opacity: 40%;
 }
 

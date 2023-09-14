@@ -7,8 +7,19 @@ let currentProject = 0;
 let posProject = 0;
 let projectSlider = document.getElementById("slideshow__inner")
 
-let imagePositions = Array(2).fill().map(() => Array(projects.length).fill(0));
-// Dans ce tableau la ligne [0] correspond au numéro de la slide en cours et la ligne [1] au décalage de translation du slider de projet en cours
+let imagePositions = Array(projects.length).fill(0);
+
+displayImages()
+
+function displayImages(){
+    for(i = 0; i < projects.length; i++){
+        let slides = projects[i].getElementsByClassName("slideshow__image");
+        for(j=0; j < slides.length-1; j++){
+            slides[j].style.display = "none";
+        }
+        slides[imagePositions[i]].style.display="block";
+    }
+}
 
 function slideRight(){
     if(currentProject < projects.length -1){
@@ -30,43 +41,32 @@ function slideLeft(){
 function slideUp(){
     let project = projects[currentProject];
     let slides = project.getElementsByClassName("slideshow__image")
-    let currentSlide = imagePositions[0][currentProject];
-    let imageSlider = project.getElementsByClassName("slideshow__project_inner")[0];
+    let currentSlide = imagePositions[currentProject];
 
     if(currentSlide < slides.length-1){
-        imagePositions[1][currentProject] += slides[currentSlide].offsetHeight;
-        imagePositions[0][currentProject]++;
-        imageSlider.style.transform = "translateY(-"+imagePositions[1][currentProject]+"px)"
+        imagePositions[currentProject]++;
     }
     else{
-        imagePositions[1][currentProject] = 0;
-        imagePositions[0][currentProject] = 0;
-        imageSlider.style.transform = "translateY(0px)";
+        imagePositions[currentProject] = 0;
     }
+
+    displayImages();
 
 }
 
 function slideDown(){
     let project = projects[currentProject];
     let slides = project.getElementsByClassName("slideshow__image")
-    let currentSlide = imagePositions[0][currentProject];
-    let imageSlider = project.getElementsByClassName("slideshow__project_inner")[0];
+    let currentSlide = imagePositions[currentProject];
 
     if(currentSlide > 0){
-        imagePositions[1][currentProject] -= slides[currentSlide].offsetHeight;
-        imagePositions[0][currentProject]--;
-        imageSlider.style.transform = "translateY(-"+imagePositions[1][currentProject]+"px)"
+        imagePositions[currentProject]--;
     }
     else{
-        let totalLength = 0;
-        for(i = 0; i < slides.length-1; i++){
-            totalLength += slides[i].offsetHeight;
-        }
-        imagePositions[1][currentProject] = totalLength;
-        imagePositions[0][currentProject] = slides.length-1;
-        
-        imageSlider.style.transform = "translateY(-"+ imagePositions[1][currentProject] +"px)";
+        imagePositions[currentProject] = slides.length-1;        
     }
+
+    displayImages();
 
 }
 
