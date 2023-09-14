@@ -157,6 +157,12 @@ h1{
     opacity: 40%;
 }
 
+/* CAPTIONS */
+
+.caption__project{
+    display: none;
+}
+
 /* PAGE INFORMATIONS */
 
 .informations__header{

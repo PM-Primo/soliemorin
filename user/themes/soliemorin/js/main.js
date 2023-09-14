@@ -9,7 +9,8 @@ let projectSlider = document.getElementById("slideshow__inner")
 
 let imagePositions = Array(projects.length).fill(0);
 
-displayImages()
+displayImages();
+displayCaptions();
 
 function displayImages(){
     for(i = 0; i < projects.length; i++){
@@ -21,12 +22,25 @@ function displayImages(){
     }
 }
 
+function displayCaptions(){
+    let captions = document.getElementsByClassName("caption__project");
+    for(i = 0; i < projects.length; i++){
+        if(i == currentProject){
+            captions[i].style.display = "block";
+        }
+        else{
+            captions[i].style.display = "none";
+        }
+    }
+}
+
 function slideRight(){
     if(currentProject < projects.length -1){
         posProject += projects[currentProject].offsetWidth;
         currentProject++;
         projectSlider.style.transform = "translateX(-"+posProject+"px)"
     }
+    displayCaptions();
 }
 
 function slideLeft(){
@@ -35,7 +49,7 @@ function slideLeft(){
         currentProject--;
         projectSlider.style.transform = "translateX(-"+posProject+"px)"
     }
-
+    displayCaptions();
 }
 
 function slideUp(){
