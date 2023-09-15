@@ -72,7 +72,7 @@ h1{
 
 .header{
     width: 100%;
-    height: 10%;
+    height: 10vh;
     padding: 0 1rem 0 1rem;
     display: flex;
     flex-direction: row;
@@ -161,6 +161,14 @@ h1{
 
 /* CAPTIONS */
 
+.caption__container{
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0 0 1rem;
+}
+
 .caption__project{
     display: none;
 }
@@ -170,6 +178,13 @@ h1{
 
 .informations__logo{
     color:var(--main-white);
+    cursor: pointer;
+}
+
+.informations__logo:hover{
+    color:var(--main-blue);
+    -webkit-text-stroke: 1px var(--main-white);
+    text-stroke: 1px var(--main-white);
 }
 
 .informations__close{
@@ -232,6 +247,9 @@ h1{
 .informations__first_column{
     width: 30%;
     padding: 1rem 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .informations__second_column{
@@ -243,26 +261,26 @@ h1{
 
 }
 
+
 /* INFORMATIONS SCROLLBAR */
 
 ::-webkit-scrollbar {
     width: 10px;
-  }
+}
   
-  /* Track */
-  ::-webkit-scrollbar-track {
+/* Track */
+::-webkit-scrollbar-track {
     background: var(--main-blue);
     opacity: 0%;
-  }
+}
   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+/* Handle */
+::-webkit-scrollbar-thumb {
     background: var(--faded-blue);
     border-radius: 5px;
-
-  }
+}
   
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
     background: var(--main-white);
-  }
+}

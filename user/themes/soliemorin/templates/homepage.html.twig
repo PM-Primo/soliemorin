@@ -37,18 +37,28 @@
     <div id="informations__container" class="informations__container">
 
         <div class="header">
-            <h1 class="informations__logo">Solie Morin</h1>
+            <h1 class="informations__logo" onclick="removeInfos()">Solie Morin</h1>
             <a href="javascript:void(0);" onclick="removeInfos()" class="informations__close">[X]</a>
         </div>
 
         <div class="informations__content_wrapper">            
             <div class="informations__first_column">
-                {{page.find('/informations').header.custom.firstcol|markdown}}
+                <div>
+                    {{page.find('/informations').header.custom.firstcol|markdown}}
+                </div>
+                <div class="informations__footer">
+                    <small>
+                        (c) {{ 'now' | date('Y') }} Solie Morin.
+                        <br> Droits réservés
+                    </small>
+                </div>
             </div>
             <div class="informations__second_column">
                 {{page.find('/informations').header.custom.secondcol|markdown}}
             </div>
         </div>
+
+
 
     </div>
     
