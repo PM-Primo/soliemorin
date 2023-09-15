@@ -187,16 +187,22 @@ h1{
     text-stroke: 1px var(--main-white);
 }
 
-.informations__close{
-    color: var(--main-white);
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    text-decoration: none;
+
+
+.informations__close_icon{
+    display: block;
 }
 
-.informations__close:hover{
-    text-decoration: underline;
+.informations__close_icon_hovered{
+    display: none;
+}
+
+.informations__close_icon_box:hover .informations__close_icon{
+    display: none;
+}
+
+.informations__close_icon_box:hover .informations__close_icon_hovered{
+    display: block;
 }
 
 .informations__container{
