@@ -60,6 +60,8 @@ body {
     color: var(--main-blue);
     height: 100%;
     background-color: var(--main-white);
+    cursor: url('../images/cursor.png'), auto;
+
 }
 
 h1{
@@ -159,6 +161,14 @@ h1{
     opacity: 40%;
 }
 
+#slideshow__overlay_left:hover{
+    cursor: url('../images/left_arrow.svg'), pointer ;
+}
+
+#slideshow__overlay_right:hover{
+    cursor: url('../images/right_arrow.svg'), pointer ;
+}
+
 /* CAPTIONS */
 
 .caption__container{
@@ -187,8 +197,6 @@ h1{
     text-stroke: 1px var(--main-white);
 }
 
-
-
 .informations__close_icon{
     display: block;
 }
@@ -196,6 +204,7 @@ h1{
 .informations__close_icon_hovered{
     display: none;
 }
+
 
 .informations__close_icon_box:hover .informations__close_icon{
     display: none;

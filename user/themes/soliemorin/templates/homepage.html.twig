@@ -2,9 +2,11 @@
 
 {% block body %}
 
+    {% set projectsList = page.find('/projets').children.published.order("title", "asc") %}
+
     <div class="slideshow__container">
         <div class="slideshow__inner" id="slideshow__inner">
-            {% for project in page.find('/projets').children.published.order("title", "asc") %}
+            {% for project in projectsList %}
                 <div class="slideshow__project">
                     <div class="slideshow__project_inner">
                         {% for slide in project.header.custom.images %}
@@ -25,7 +27,7 @@
     </div>
     
     <div class="caption__container">
-        {% for project in page.find('/projets').children.published.order("title", "asc") %}
+        {% for project in projectsList %}
             <span class="caption__project">{{project.header.custom.caption}}, {{project.header.date|date("Y")}} 
                 {% if project.header.custom.type != null %}
                     ({{project.header.custom.type}})
