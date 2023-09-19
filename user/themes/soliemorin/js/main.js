@@ -36,17 +36,23 @@ function displayCaptions(){
 
 function slideRight(){
     if(currentProject < projects.length -1){
-        posProject += projects[currentProject].offsetWidth;
+        posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
         currentProject++;
-        projectSlider.style.transform = "translateX(-"+posProject+"px)"
+        projectSlider.style.transform = "translateX(-"+posProject+"px)";
     }
     displayCaptions();
 }
 
 function slideLeft(){
-    if(currentProject > 0){
-        posProject -= projects[currentProject-1].offsetWidth;
+    if(currentProject > 1){
+        posProject = projects[(currentProject-1)].offsetLeft - ((window.innerWidth-projects[(currentProject-1)].offsetWidth)/2);
         currentProject--;
+        projectSlider.style.transform = "translateX(-"+posProject+"px)";
+    }
+    else if(currentProject == 1){
+        console.log("Current = 1");
+        posProject = 0;
+        currentProject = 0;
         projectSlider.style.transform = "translateX(-"+posProject+"px)"
     }
     displayCaptions();
@@ -68,7 +74,7 @@ function slideUp(){
 
 }
 
-function slideDown(){
+function slideDown(){ 
     let project = projects[currentProject];
     let slides = project.getElementsByClassName("slideshow__image")
     let currentSlide = imagePositions[currentProject];
@@ -115,7 +121,5 @@ function checkKeyPressed(e) {
     if (e.keyCode == "38") {
         slideDown();
     }
-
-    console.log(imagePositions);
 
 }
