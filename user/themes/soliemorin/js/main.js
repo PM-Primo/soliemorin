@@ -125,23 +125,37 @@ function slideUp(){
     if(currentSlide < slides.length-1){
         imagePositions[currentProject]++;
         counters[currentProject].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
-        if(currentProject == 0){
+        if(currentProject == 2){
             imagePositions[(projects.length - 2)]++;
             counters[(projects.length -2)].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
         }
-        else if(currentProject == 1){
+        else if(currentProject == 3){
             imagePositions[(projects.length - 1)]++;
+        }
+        if(currentProject == (projects.length - 3) ){
+            imagePositions[1]++;
+            counters[1].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+        }
+        else if(currentProject == (projects.length - 4) ){
+            imagePositions[0]++;
         }
     }
     else{
         imagePositions[currentProject] = 0;
         counters[currentProject].innerHTML = "1/"+slides.length;
-        if(currentProject == 0){
+        if(currentProject == 2){
             imagePositions[(projects.length - 2)] = 0;
             counters[(projects.length -2)].innerHTML = "1/"+slides.length;
         }
-        else if(currentProject == 1){
+        else if(currentProject == 3){
             imagePositions[(projects.length - 1)] = 0;
+        }
+        if(currentProject == (projects.length - 3) ){
+            imagePositions[1] = 0 ;
+            counters[1].innerHTML = "1/"+slides.length;
+        }
+        else if(currentProject == (projects.length - 4) ){
+            imagePositions[0] = 0;
         }
     }
 
