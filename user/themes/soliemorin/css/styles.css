@@ -172,8 +172,8 @@ h1{
 
 /* SLIDESHOW INFINI */
 
-.first_project_clone{
-    margin-left: .5rem;
+.slideshow__invisible_slides{
+    display: none;
 }
 
 /* CAPTIONS */
@@ -183,10 +183,15 @@ h1{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 0 0 1rem;
+    justify-content: space-between;
+    padding: 0 1rem 0 1rem;
 }
 
 .caption__project{
+    display: none;
+}
+
+.caption__slides_counter{
     display: none;
 }
 

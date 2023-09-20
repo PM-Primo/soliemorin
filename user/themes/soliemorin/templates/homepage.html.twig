@@ -6,6 +6,19 @@
 
     <div class="slideshow__container">
         <div class="slideshow__inner" id="slideshow__inner">
+            {# CLONES DES 2 DERNIERES SLIDES #}
+            {% for project in projectsList|slice(((projectsList|length)-2), 2) %}
+            <div class="slideshow__project slideshow__invisible_slides">
+                <div class="slideshow__project_inner">
+                    {% for slide in project.header.custom.images %}
+                        {% set imageUrl = (slide.image|first).name %}
+                        <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image">
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+
+            {# VRAIES SLIDES #}
             {% for project in projectsList %}
                 <div class="slideshow__project">
                     <div class="slideshow__project_inner">
@@ -16,19 +29,11 @@
                     </div>
                 </div>
             {% endfor %}
-            {% for project in projectsList|slice(0, 1) %}
-                <div class="slideshow__project first_project_clone">
-                    <div class="slideshow__project_inner first_project_clone__inner">
-                        {% for slide in project.header.custom.images %}
-                            {% set imageUrl = (slide.image|first).name %}
-                            <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image">
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
-            {% for project in projectsList|slice(1, 1) %}
-                <div class="slideshow__project second_project_clone">
-                    <div class="slideshow__project_inner second_project_clone__inner">
+
+            {# CLONES DES 2 PREMIERES SLIDES #}
+            {% for project in projectsList|slice(0, 2) %}
+                <div class="slideshow__project">
+                    <div class="slideshow__project_inner">
                         {% for slide in project.header.custom.images %}
                             {% set imageUrl = (slide.image|first).name %}
                             <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image">
@@ -39,6 +44,7 @@
 
 
         </div>
+
         <div class="slideshow__overlay">
             <div id="slideshow__overlay_left" onclick="slideLeft()"></div>
             <div id="slideshow__overlay_middle" onclick="slideUp()"></div>
@@ -47,20 +53,35 @@
     </div>
     
     <div class="caption__container">
+        {# LES CAPTIONS & COMPTEURS POUR LES 2 CLONES DES SLIDES FINALES #}
+        {% for project in projectsList|slice(((projectsList|length)-2), 2) %}
+            <span class="caption__project">{{project.header.custom.caption}}, {{project.header.date|date("Y")}} 
+                {% if project.header.custom.type != null %}
+                    ({{project.header.custom.type}})
+                {% endif %}
+            </span>
+            <span class="caption__slides_counter">1/{{project.header.custom.images|length}}</span>
+        {% endfor %}        
+                
+        {# LES CAPTIONS & COMPTEURS POUR LES VRAIS PROJETS #}
         {% for project in projectsList %}
             <span class="caption__project">{{project.header.custom.caption}}, {{project.header.date|date("Y")}} 
                 {% if project.header.custom.type != null %}
                     ({{project.header.custom.type}})
                 {% endif %}
             </span>
+            <span class="caption__slides_counter">1/{{project.header.custom.images|length}}</span>
         {% endfor %}
+
+        {# LES CAPTIONS & COMPTEURS POUR LES 2 CLONES DES PREMIERES SLIDES #}
         {% for project in projectsList|slice(0, 2) %}
             <span class="caption__project">{{project.header.custom.caption}}, {{project.header.date|date("Y")}} 
                 {% if project.header.custom.type != null %}
                     ({{project.header.custom.type}})
                 {% endif %}
             </span>
-        {% endfor %}
+            <span class="caption__slides_counter">1/{{project.header.custom.images|length}}</span>
+        {% endfor %}        
     </div>
 
     <div id="informations__container" class="informations__container">

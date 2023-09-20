@@ -3,11 +3,13 @@
 
 
 let projects = document.getElementsByClassName("slideshow__project");
-let currentProject = 0;
+let currentProject = 2;
 let posProject = 0;
 let projectSlider = document.getElementById("slideshow__inner")
 
 let imagePositions = Array(projects.length).fill(0);
+
+let firstSlide = true;
 
 displayImages();
 displayCaptions();
@@ -24,29 +26,57 @@ function displayImages(){
 
 function displayCaptions(){
     let captions = document.getElementsByClassName("caption__project");
+    let counters = document.getElementsByClassName("caption__slides_counter");
     for(i = 0; i < projects.length; i++){
         if(i == currentProject){
             captions[i].style.display = "block";
+            counters[i].style.display = "block";
         }
         else{
             captions[i].style.display = "none";
+            counters[i].style.display = "none";
         }
     }
 }
 
+console.log(currentProject);
+
+
 function slideRight(){
-    if(currentProject < projects.length -3){
+    if(firstSlide == true){
+        posProject = projects[3].offsetLeft - ((window.innerWidth-projects[3].offsetWidth)/2);
+        projectSlider.style.transform = "translateX(-"+posProject+"px)";
+        currentProject++;
+
+        projectSlider.addEventListener("transitionend", function raz() {
+            projectSlider.style.transition = "none";
+            invisibleSlides = projectSlider.getElementsByClassName("slideshow__invisible_slides");
+            invisibleSlides[1].classList.remove("slideshow__invisible_slides");
+            invisibleSlides[0].classList.remove("slideshow__invisible_slides");
+            posProject = projects[3].offsetLeft - ((window.innerWidth-projects[3].offsetWidth)/2);
+            projectSlider.style.transform = "translateX(-"+posProject+"px)";
+            displayCaptions();
+            setTimeout(function() {
+                projectSlider.style.transition = "1000ms";
+            });
+            projectSlider.removeEventListener("transitionend", raz);
+        })
+        firstSlide = false;
+    }
+    else if(currentProject < projects.length -3){
         posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
         currentProject++;
         projectSlider.style.transform = "translateX(-"+posProject+"px)";
     }
     else if(currentProject == projects.length -3){
-        posProject = projects[(currentProject)].offsetLeft + projects[(currentProject)].offsetWidth ;
+        posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
         currentProject++;
         projectSlider.addEventListener("transitionend", function raz() {
             projectSlider.style.transition = "none";
-            projectSlider.style.transform = "translateX(0px)";
-            currentProject = 0;
+            posProject = projects[2].offsetLeft - ((window.innerWidth-projects[2].offsetWidth)/2);
+            projectSlider.style.transform = "translateX(-"+posProject+"px)";
+            currentProject = 2;
+            displayCaptions();
             setTimeout(function() {
                 projectSlider.style.transition = "1000ms";
             });
@@ -59,29 +89,45 @@ function slideRight(){
 
 
 function slideLeft(){
-    if(currentProject > 1){
+        
+
+    if(currentProject > 2){
         posProject = projects[(currentProject-1)].offsetLeft - ((window.innerWidth-projects[(currentProject-1)].offsetWidth)/2);
         currentProject--;
         projectSlider.style.transform = "translateX(-"+posProject+"px)";
     }
-    else if(currentProject == 1){
-        console.log("Current = 1");
-        posProject = 0;
-        currentProject = 0;
-        projectSlider.style.transform = "translateX(-"+posProject+"px)"
+    else if(currentProject == 2){
+        posProject = projects[(currentProject-1)].offsetLeft - ((window.innerWidth-projects[(currentProject-1)].offsetWidth)/2);
+        currentProject--;
+        projectSlider.addEventListener("transitionend", function raz() {
+            projectSlider.style.transition = "none";
+            posProject = projects[(projects.length - 3)].offsetLeft - ((window.innerWidth-projects[projects.length - 3].offsetWidth)/2);
+            projectSlider.style.transform = "translateX(-"+posProject+"px)";
+            currentProject = (projects.length -3);
+            displayCaptions();
+            setTimeout(function() {
+                projectSlider.style.transition = "1000ms";
+            });
+            projectSlider.removeEventListener("transitionend", raz)
+        })
+        projectSlider.style.transform = "translateX(-"+posProject+"px)";
     }
+
     displayCaptions();
 }
 
 function slideUp(){
     let project = projects[currentProject];
-    let slides = project.getElementsByClassName("slideshow__image")
+    let slides = project.getElementsByClassName("slideshow__image");
     let currentSlide = imagePositions[currentProject];
+    let counters = document.getElementsByClassName("caption__slides_counter");
 
     if(currentSlide < slides.length-1){
         imagePositions[currentProject]++;
+        counters[currentProject].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
         if(currentProject == 0){
             imagePositions[(projects.length - 2)]++;
+            counters[(projects.length -2)].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
         }
         else if(currentProject == 1){
             imagePositions[(projects.length - 1)]++;
@@ -89,8 +135,10 @@ function slideUp(){
     }
     else{
         imagePositions[currentProject] = 0;
+        counters[currentProject].innerHTML = "1/"+slides.length;
         if(currentProject == 0){
             imagePositions[(projects.length - 2)] = 0;
+            counters[(projects.length -2)].innerHTML = "1/"+slides.length;
         }
         else if(currentProject == 1){
             imagePositions[(projects.length - 1)] = 0;
@@ -148,5 +196,7 @@ function checkKeyPressed(e) {
     if (e.keyCode == "38") {
         slideDown();
     }
+
+    console.log(currentProject)
 
 }
