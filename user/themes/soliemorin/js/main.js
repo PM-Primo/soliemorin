@@ -80,9 +80,21 @@ function slideUp(){
 
     if(currentSlide < slides.length-1){
         imagePositions[currentProject]++;
+        if(currentProject == 0){
+            imagePositions[(projects.length - 2)]++;
+        }
+        else if(currentProject == 1){
+            imagePositions[(projects.length - 1)]++;
+        }
     }
     else{
         imagePositions[currentProject] = 0;
+        if(currentProject == 0){
+            imagePositions[(projects.length - 2)] = 0;
+        }
+        else if(currentProject == 1){
+            imagePositions[(projects.length - 1)] = 0;
+        }
     }
 
     displayImages();
