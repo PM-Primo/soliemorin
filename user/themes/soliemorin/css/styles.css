@@ -170,6 +170,12 @@ h1{
     cursor: url('../images/right_arrow.svg'), pointer ;
 }
 
+/* SLIDESHOW INFINI */
+
+.first_project_clone{
+    margin-left: .5rem;
+}
+
 /* CAPTIONS */
 
 .caption__container{

@@ -16,7 +16,7 @@
                     </div>
                 </div>
             {% endfor %}
-            {# {% for project in projectsList|slice(0, 1) %}
+            {% for project in projectsList|slice(0, 1) %}
                 <div class="slideshow__project first_project_clone">
                     <div class="slideshow__project_inner first_project_clone__inner">
                         {% for slide in project.header.custom.images %}
@@ -35,7 +35,7 @@
                         {% endfor %}
                     </div>
                 </div>
-            {% endfor %} #}
+            {% endfor %}
 
 
         </div>
@@ -48,6 +48,13 @@
     
     <div class="caption__container">
         {% for project in projectsList %}
+            <span class="caption__project">{{project.header.custom.caption}}, {{project.header.date|date("Y")}} 
+                {% if project.header.custom.type != null %}
+                    ({{project.header.custom.type}})
+                {% endif %}
+            </span>
+        {% endfor %}
+        {% for project in projectsList|slice(0, 2) %}
             <span class="caption__project">{{project.header.custom.caption}}, {{project.header.date|date("Y")}} 
                 {% if project.header.custom.type != null %}
                     ({{project.header.custom.type}})

@@ -35,13 +35,28 @@ function displayCaptions(){
 }
 
 function slideRight(){
-    if(currentProject < projects.length -1){
+    if(currentProject < projects.length -3){
         posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
         currentProject++;
         projectSlider.style.transform = "translateX(-"+posProject+"px)";
     }
+    else if(currentProject == projects.length -3){
+        posProject = projects[(currentProject)].offsetLeft + projects[(currentProject)].offsetWidth ;
+        currentProject++;
+        projectSlider.addEventListener("transitionend", function raz() {
+            projectSlider.style.transition = "none";
+            projectSlider.style.transform = "translateX(0px)";
+            currentProject = 0;
+            setTimeout(function() {
+                projectSlider.style.transition = "1000ms";
+            });
+            projectSlider.removeEventListener("transitionend", raz)
+        })
+        projectSlider.style.transform = "translateX(-"+posProject+"px)";
+    }
     displayCaptions();
 }
+
 
 function slideLeft(){
     if(currentProject > 1){
