@@ -43,27 +43,7 @@ console.log(currentProject);
 
 
 function slideRight(){
-    if(firstSlide == true){
-        posProject = projects[3].offsetLeft - ((window.innerWidth-projects[3].offsetWidth)/2);
-        projectSlider.style.transform = "translateX(-"+posProject+"px)";
-        currentProject++;
-
-        projectSlider.addEventListener("transitionend", function raz() {
-            projectSlider.style.transition = "none";
-            invisibleSlides = projectSlider.getElementsByClassName("slideshow__invisible_slides");
-            invisibleSlides[1].classList.remove("slideshow__invisible_slides");
-            invisibleSlides[0].classList.remove("slideshow__invisible_slides");
-            posProject = projects[3].offsetLeft - ((window.innerWidth-projects[3].offsetWidth)/2);
-            projectSlider.style.transform = "translateX(-"+posProject+"px)";
-            displayCaptions();
-            setTimeout(function() {
-                projectSlider.style.transition = "1000ms";
-            });
-            projectSlider.removeEventListener("transitionend", raz);
-        })
-        firstSlide = false;
-    }
-    else if(currentProject < projects.length -3){
+    if(currentProject < projects.length -3){
         posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
         currentProject++;
         projectSlider.style.transform = "translateX(-"+posProject+"px)";
@@ -73,6 +53,12 @@ function slideRight(){
         currentProject++;
         projectSlider.addEventListener("transitionend", function raz() {
             projectSlider.style.transition = "none";
+            if(firstSlide == true){
+                invisibleSlides = projectSlider.getElementsByClassName("slideshow__invisible_slides");
+                invisibleSlides[1].classList.remove("slideshow__invisible_slides");
+                invisibleSlides[0].classList.remove("slideshow__invisible_slides");
+                firstSlide = false;
+            }
             posProject = projects[2].offsetLeft - ((window.innerWidth-projects[2].offsetWidth)/2);
             projectSlider.style.transform = "translateX(-"+posProject+"px)";
             currentProject = 2;
@@ -91,12 +77,17 @@ function slideRight(){
 function slideLeft(){
         
 
-    if(currentProject > 2){
+    if(currentProject == 3 && firstSlide == true ){
+        currentProject--;
+        projectSlider.style.transform = "translateX(0px)";
+        console.log("bon cas de figure");
+    }
+    else if(currentProject > 3 || (currentProject == 3 && firstSlide == false )){
         posProject = projects[(currentProject-1)].offsetLeft - ((window.innerWidth-projects[(currentProject-1)].offsetWidth)/2);
         currentProject--;
         projectSlider.style.transform = "translateX(-"+posProject+"px)";
     }
-    else if(currentProject == 2){
+    else if(currentProject == 2 && firstSlide == false){
         posProject = projects[(currentProject-1)].offsetLeft - ((window.innerWidth-projects[(currentProject-1)].offsetWidth)/2);
         currentProject--;
         projectSlider.addEventListener("transitionend", function raz() {
