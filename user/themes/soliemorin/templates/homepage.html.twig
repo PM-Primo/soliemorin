@@ -65,7 +65,7 @@
                 
         {# LES CAPTIONS & COMPTEURS POUR LES VRAIS PROJETS #}
         {% for project in projectsList %}
-            <span class="caption__project">{{project.header.custom.caption}}, {{project.header.date|date("Y")}} 
+            <span class="caption__project">{{project.header.custom.caption}}, {{project.header.dateDebut|date("Y")}}{% if project.header.dateFin != null %}-{{- project.header.dateFin|date("Y")}}{% endif %}
                 {% if project.header.custom.type != null %}
                     ({{project.header.custom.type}})
                 {% endif %}

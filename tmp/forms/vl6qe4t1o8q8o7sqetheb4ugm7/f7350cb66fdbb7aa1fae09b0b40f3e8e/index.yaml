@@ -1,0 +1,31 @@
+form: flex-pages
+id: 'tmp://forms/session/f7350cb66fdbb7aa1fae09b0b40f3e8e'
+unique_id: f7350cb66fdbb7aa1fae09b0b40f3e8e
+url: '/pages/projets/test/:add'
+user:
+  username: pm_primo
+  email: pierrem.primo@gmail.com
+timestamps:
+  created: 1695894011
+  updated: 1695894011
+data: null
+files: {  }
+object:
+  type: pages
+  key: projets/test
+  storage_key: ''
+  timestamp: 0
+  serialized:
+    __META: {  }
+    storage_key: ''
+    parent_key: projets
+    order: false
+    folder: test
+    template: project
+    lang: ''
+    root: false
+    route: /projets
+    name: project
+    header:
+      title: test
+    frontmatter: "title: test\n"

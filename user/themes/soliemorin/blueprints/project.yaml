@@ -44,11 +44,17 @@ form:
               type: text
               label: Légende du projet
 
-            header.date:
+            header.dateDebut:
               type: datetime
-              label: PLUGIN_ADMIN.DATE
+              label: Date de début
               toggleable: true
-              help: PLUGIN_ADMIN.DATE_HELP
+              help: Pour les projets ponctuels n'ajouter qu'une date de début et pas de date de fin
+
+            header.dateFin:
+              type: datetime
+              label: Date de fin
+              toggleable: true
+              help: Pour les projets ponctuels n'ajouter qu'une date de début et pas de date de fin
 
             header.custom.type:
               type: text
