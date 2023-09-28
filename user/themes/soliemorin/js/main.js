@@ -9,10 +9,11 @@ let projectSlider = document.getElementById("slideshow__inner")
 
 let imagePositions = Array(projects.length).fill(0);
 
-let firstSlide = true;
+let leftLock = true;
 
 displayImages();
 displayCaptions();
+addClickControls();
 
 function displayImages(){
     for(i = 0; i < projects.length; i++){
@@ -39,9 +40,6 @@ function displayCaptions(){
     }
 }
 
-console.log(currentProject);
-
-
 function slideRight(){
     if(currentProject < projects.length -3){
         posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
@@ -53,11 +51,11 @@ function slideRight(){
         currentProject++;
         projectSlider.addEventListener("transitionend", function raz() {
             projectSlider.style.transition = "none";
-            if(firstSlide == true){
+            if(leftLock == true){
                 invisibleSlides = projectSlider.getElementsByClassName("slideshow__invisible_slides");
                 invisibleSlides[1].classList.remove("slideshow__invisible_slides");
                 invisibleSlides[0].classList.remove("slideshow__invisible_slides");
-                firstSlide = false;
+                leftLock = false;
             }
             posProject = projects[2].offsetLeft - ((window.innerWidth-projects[2].offsetWidth)/2);
             projectSlider.style.transform = "translateX(-"+posProject+"px)";
@@ -71,23 +69,24 @@ function slideRight(){
         projectSlider.style.transform = "translateX(-"+posProject+"px)";
     }
     displayCaptions();
+    addClickControls();
 }
 
 
 function slideLeft(){
         
 
-    if(currentProject == 3 && firstSlide == true ){
+    if(currentProject == 3 && leftLock == true ){
         currentProject--;
         projectSlider.style.transform = "translateX(0px)";
         console.log("bon cas de figure");
     }
-    else if(currentProject > 3 || (currentProject == 3 && firstSlide == false )){
+    else if(currentProject > 3 || (currentProject == 3 && leftLock == false )){
         posProject = projects[(currentProject-1)].offsetLeft - ((window.innerWidth-projects[(currentProject-1)].offsetWidth)/2);
         currentProject--;
         projectSlider.style.transform = "translateX(-"+posProject+"px)";
     }
-    else if(currentProject == 2 && firstSlide == false){
+    else if(currentProject == 2 && leftLock == false){
         posProject = projects[(currentProject-1)].offsetLeft - ((window.innerWidth-projects[(currentProject-1)].offsetWidth)/2);
         currentProject--;
         projectSlider.addEventListener("transitionend", function raz() {
@@ -105,6 +104,8 @@ function slideLeft(){
     }
 
     displayCaptions();
+    addClickControls();
+
 }
 
 function slideUp(){
@@ -170,7 +171,6 @@ function slideDown(){
 
 }
 
-
 // AFFICHAGE DES INFORMATIONS
 
 function displayInfos(){
@@ -183,6 +183,22 @@ function removeInfos(){
     infoBox.classList.remove("informations__on");
 }
 
+// CONTRÔLES DU SLIDESHOW A LA SOURIS
+
+function addClickControls(){
+
+    for(i = currentProject-2; i < currentProject+1; i++){
+        projects[i].classList.remove("current_project", "prev_project", "next_project");
+        projects[i].removeAttribute('onclick');
+    }
+
+    projects[currentProject].classList.add("current_project");
+    projects[currentProject-1].classList.add("prev_project");
+    projects[currentProject+1].classList.add("next_project");
+    projects[currentProject].setAttribute('onclick','slideUp()')
+    projects[currentProject-1].setAttribute('onclick','slideLeft()')
+    projects[currentProject+1].setAttribute('onclick','slideRight()')
+}
 
 // RACCOURCIS CLAVIER
 window.addEventListener("keydown", checkKeyPressed, false);

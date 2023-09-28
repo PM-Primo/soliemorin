@@ -139,34 +139,12 @@ h1{
     display: block;
 }
 
-.slideshow__overlay{
-    position: absolute;
-    width: 100%;
-    height:100%;
-    top:0;
-    display: flex;
-    flex-direction: row;
-}
 
-#slideshow__overlay_left, #slideshow__overlay_right{
-    width: 20%;
-    height: 100%;
-    /* background-color: green; */
-    opacity: 40%;
-}
-
-#slideshow__overlay_middle{
-    width:60%;
-    height: 100%;
-    /* background-color: red; */
-    opacity: 40%;
-}
-
-#slideshow__overlay_left:hover{
+.prev_project:hover{
     cursor: url('../images/left_arrow.svg'), pointer ;
 }
 
-#slideshow__overlay_right:hover{
+.next_project:hover{
     cursor: url('../images/right_arrow.svg'), pointer ;
 }
 
