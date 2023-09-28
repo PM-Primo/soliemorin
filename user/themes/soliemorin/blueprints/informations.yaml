@@ -42,11 +42,11 @@ form:
 
             header.custom.firstcol:
               type: markdown
-              label: "<strong>Première colonne d'informations</strong> – Intertitre ( ##Intertitre ). Italique ( _texte_ ). Lien ( [Texte](https://monurl.fr) ).<br> Pour revenir à la ligne, faire deux espaces puis retour à la ligne. <br> Puces pour les listes : '+', '-' ou '*' "
+              label: "<strong>Première colonne d'informations</strong> – Soulignage : **Texte Souligné** / Italique : _Texte italique_ / Lien : [Texte](https://monurl.fr)<br> Pour revenir à la ligne, faire deux espaces puis retour à la ligne<br> Puces pour les listes : '+', '-' ou '*' "
            
             header.custom.secondcol:
               type: markdown
-              label: "<strong>Seconde colonne d'informations</strong> – Intertitre ( ##Intertitre ). Italique ( _texte_ ). Lien ( [Texte](https://monurl.fr) ).<br> Pour revenir à la ligne, faire deux espaces puis retour à la ligne. <br> Puces pour les listes : '+', '-' ou '*' "
+              label: "<strong>Seconde colonne d'informations</strong> – Soulignage : **Texte Souligné** / Italique _Texte italique_ / Lien : [Texte](https://monurl.fr)<br> Pour revenir à la ligne, faire deux espaces puis retour à la ligne<br> Puces pour les listes : '+', '-' ou '*' "
 
         advanced:
           type: tab
