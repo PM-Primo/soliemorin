@@ -61,6 +61,7 @@ function slideRight(){
             projectSlider.style.transform = "translateX(-"+posProject+"px)";
             currentProject = 2;
             displayCaptions();
+            addClickControls();
             setTimeout(function() {
                 projectSlider.style.transition = "1000ms";
             });
@@ -79,7 +80,6 @@ function slideLeft(){
     if(currentProject == 3 && leftLock == true ){
         currentProject--;
         projectSlider.style.transform = "translateX(0px)";
-        console.log("bon cas de figure");
     }
     else if(currentProject > 3 || (currentProject == 3 && leftLock == false )){
         posProject = projects[(currentProject-1)].offsetLeft - ((window.innerWidth-projects[(currentProject-1)].offsetWidth)/2);
@@ -95,6 +95,7 @@ function slideLeft(){
             projectSlider.style.transform = "translateX(-"+posProject+"px)";
             currentProject = (projects.length -3);
             displayCaptions();
+            addClickControls();
             setTimeout(function() {
                 projectSlider.style.transition = "1000ms";
             });

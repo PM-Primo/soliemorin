@@ -88,6 +88,7 @@ h1{
 
 .header__infos:hover{
     text-decoration: underline;
+    cursor: url('../images/pointer.png'), pointer ;
 }
 
 .main__wrapper{
@@ -139,13 +140,16 @@ h1{
     display: block;
 }
 
+.current_project:hover{
+    cursor: url('../images/pointer.png'), pointer ;
+}
 
 .prev_project:hover{
-    cursor: url('../images/left_arrow.svg'), pointer ;
+    cursor: url('../images/leftarrow.png'), pointer ;
 }
 
 .next_project:hover{
-    cursor: url('../images/right_arrow.svg'), pointer ;
+    cursor: url('../images/rightarrow.png'), pointer ;
 }
 
 /* SLIDESHOW INFINI */
@@ -178,13 +182,14 @@ h1{
 
 .informations__logo{
     color:var(--main-white);
-    cursor: pointer;
+    cursor: url('../images/pointer.png'), auto;
 }
 
 .informations__logo:hover{
     color:var(--main-blue);
     -webkit-text-stroke: 1px var(--main-white);
     text-stroke: 1px var(--main-white);
+    cursor: url('../images/pointer.png');
 }
 
 .informations__close_icon{
@@ -195,6 +200,9 @@ h1{
     display: none;
 }
 
+.informations__close_icon_box:hover{
+    cursor: url('../images/pointer.png'), auto ;
+}
 
 .informations__close_icon_box:hover .informations__close_icon{
     display: none;
@@ -218,6 +226,10 @@ h1{
     overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+
+.informations__container:hover{
+    cursor: url('../images/cursorinfo.png'), auto ;
 }
 
 .informations__on{
