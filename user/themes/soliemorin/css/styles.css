@@ -252,13 +252,13 @@ h1{
 }
 
 .informations__content_wrapper p, ul{
-    margin-bottom: 1rem;
+    margin-bottom: 2.25rem;
 }
 
 .informations__content_wrapper ul{
     list-style-position: inside;
     list-style-type : "·  ";
-    margin-top: -1rem;
+    margin-top: -2.25rem;
 }
 
 .informations__first_column{
@@ -271,7 +271,7 @@ h1{
 
 .informations__second_column{
     width: 69.5%;
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 1rem 1rem 1rem 7rem;
     overflow-y:auto;
     scrollbar-width: thin;
     scrollbar-color: var(--faded-blue) var(--main-blue);
