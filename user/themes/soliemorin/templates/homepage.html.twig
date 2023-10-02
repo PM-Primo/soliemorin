@@ -28,11 +28,22 @@
                         {% endfor %}
                     </div>
                 </div>
+
+
+                <div class="resp__caption_box">
+                    <span class="resp__caption__project">{{project.header.custom.caption}}, {{project.header.date|date("Y")}} 
+                        {% if project.header.custom.type != null %}
+                            ({{project.header.custom.type}})
+                        {% endif %}
+                    </span>
+                    <span class="resp__caption__slides_counter">1/{{project.header.custom.images|length}}</span>
+                </div>
+
             {% endfor %}
 
             {# CLONES DES 2 PREMIERES SLIDES #}
             {% for project in projectsList|slice(0, 2) %}
-                <div class="slideshow__project">
+                <div class="slideshow__project slideshow__hidden_clones">
                     <div class="slideshow__project_inner">
                         {% for slide in project.header.custom.images %}
                             {% set imageUrl = (slide.image|first).name %}

@@ -3,6 +3,7 @@
 
 
 let projects = document.getElementsByClassName("slideshow__project");
+let nodes = Array.prototype.slice.call(projects);
 let currentProject = 2;
 let posProject = 0;
 let projectSlider = document.getElementById("slideshow__inner")
@@ -11,8 +12,13 @@ let imagePositions = Array(projects.length).fill(0);
 
 let leftLock = true;
 
-displayImages();
-displayCaptions();
+if(window.matchMedia("(min-width: 1080px)").matches){
+    displayImages();
+    displayCaptions();
+
+    console.log("grand écran !")
+    
+}
 addClickControls();
 
 function displayImages(){
@@ -160,12 +166,43 @@ function slideDown(){
     let project = projects[currentProject];
     let slides = project.getElementsByClassName("slideshow__image")
     let currentSlide = imagePositions[currentProject];
+    let counters = document.getElementsByClassName("caption__slides_counter");
 
     if(currentSlide > 0){
         imagePositions[currentProject]--;
+        counters[currentProject].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+        if(currentProject == 2){
+            imagePositions[(projects.length - 2)]--;
+            counters[(projects.length -2)].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+        }
+        else if(currentProject == 3){
+            imagePositions[(projects.length - 1)]--;
+        }
+        if(currentProject == (projects.length - 3) ){
+            imagePositions[1]--;
+            counters[1].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+        }
+        else if(currentProject == (projects.length - 4) ){
+            imagePositions[0]--;
+        }
     }
     else{
-        imagePositions[currentProject] = slides.length-1;        
+        imagePositions[currentProject] = slides.length-1;
+        counters[currentProject].innerHTML = slides.length+"/"+slides.length;
+        if(currentProject == 2){
+            imagePositions[(projects.length - 2)] = slides.length-1;
+            counters[(projects.length -2)].innerHTML = slides.length+"/"+slides.length;
+        }
+        else if(currentProject == 3){
+            imagePositions[(projects.length - 1)] = slides.length-1;
+        }
+        if(currentProject == (projects.length - 3) ){
+            imagePositions[1] = slides.length-1 ;
+            counters[1].innerHTML = slides.length+"/"+slides.length;
+        }
+        else if(currentProject == (projects.length - 4) ){
+            imagePositions[0] = slides.length-1;
+        }    
     }
 
     displayImages();
@@ -184,21 +221,47 @@ function removeInfos(){
     infoBox.classList.remove("informations__on");
 }
 
+// FONCTIONS MOBILE ET TABLETTE
+
+function tabletNext(e){
+    let project = e.currentTarget;
+    let slides = project.getElementsByClassName("slideshow__image");
+    let projectIndex = nodes.indexOf(e.currentTarget);
+    let currentSlide = imagePositions[projectIndex];
+    
+    if(currentSlide < slides.length-1){
+        imagePositions[projectIndex]++;
+    }
+    else{
+        imagePositions[projectIndex] = 0;
+    }
+
+    tabletdisplayImages();
+
+}
+
 // CONTRÔLES DU SLIDESHOW A LA SOURIS
 
 function addClickControls(){
 
-    for(i = currentProject-2; i < currentProject+1; i++){
-        projects[i].classList.remove("current_project", "prev_project", "next_project");
-        projects[i].removeAttribute('onclick');
+    if(window.matchMedia("(max-width: 1080px)").matches){
+        for(i = 2; i < projects.length - 1; i++){
+            projects[i].addEventListener('click',tabletNext, false);
+        }    
+    } 
+    else {
+        for(i = currentProject-2; i < currentProject+1; i++){
+            projects[i].classList.remove("current_project", "prev_project", "next_project");
+            projects[i].removeAttribute('onclick');
+        }
+    
+        projects[currentProject].classList.add("current_project");
+        projects[currentProject-1].classList.add("prev_project");
+        projects[currentProject+1].classList.add("next_project");
+        projects[currentProject].setAttribute('onclick','slideUp()')
+        projects[currentProject-1].setAttribute('onclick','slideLeft()')
+        projects[currentProject+1].setAttribute('onclick','slideRight()')
     }
-
-    projects[currentProject].classList.add("current_project");
-    projects[currentProject-1].classList.add("prev_project");
-    projects[currentProject+1].classList.add("next_project");
-    projects[currentProject].setAttribute('onclick','slideUp()')
-    projects[currentProject-1].setAttribute('onclick','slideLeft()')
-    projects[currentProject+1].setAttribute('onclick','slideRight()')
 }
 
 // RACCOURCIS CLAVIER
@@ -215,10 +278,9 @@ function checkKeyPressed(e) {
     if (e.keyCode == "40") {
         slideUp();
     }
+
     if (e.keyCode == "38") {
         slideDown();
     }
-
-    console.log(currentProject)
 
 }
