@@ -342,7 +342,6 @@ h1{
     
     .slideshow__project{
         height: auto;
-        padding-left: 1rem;
         position: relative;
     }
     
@@ -350,7 +349,8 @@ h1{
         display: flex;
         flex-direction: row;
         gap: .5rem;
-        /* transition: 1000ms */
+        padding-left: 1rem;
+        transition: 1000ms;
     }
     
     .slideshow__image{

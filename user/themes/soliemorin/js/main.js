@@ -224,19 +224,40 @@ function removeInfos(){
 // FONCTIONS MOBILE ET TABLETTE
 
 function tabletClickRight(e){
+
     let projectSlider = e.parentNode.previousElementSibling
     let project = projectSlider.parentNode
-    let slides = project.getElementsByClassName("slideshow__image");
     let projectIndex = nodes.indexOf(project);
+    let slides = project.getElementsByClassName("slideshow__image");
     let currentSlide = imagePositions[projectIndex];
-    let overlay = project.getElementsByClassName("slideshow__overlay")[0]
 
-    console.log(projectIndex)
+    console.log(imagePositions)
+
+    if(currentSlide<slides.length-1){        
+        let slideOffset = slides[(currentSlide+1)].offsetLeft - ((window.innerWidth-slides[(currentSlide+1)].offsetWidth)/2)
+        imagePositions[projectIndex]++;
+        projectSlider.style.transform = "translateX(-"+slideOffset+"px)";
+    }  
+}
+
+function tabletClickLeft(e){
+
+    let projectSlider = e.parentNode.previousElementSibling
+    let project = projectSlider.parentNode
+    let projectIndex = nodes.indexOf(project);
+    let slides = project.getElementsByClassName("slideshow__image");
+    let currentSlide = imagePositions[projectIndex];
     
-    slideOffset = slides[(currentSlide+1)].offsetLeft - ((window.innerWidth-slides[(currentSlide+1)].offsetWidth)/2)
-    imagePositions[projectIndex]++;
-    project.style.transform = "translateX(-"+slideOffset+"px)";
-    overlay.style.transform = "translateX("+slideOffset+"px)";
+
+    if(currentSlide > 1){
+        let slideOffset = slides[(currentSlide-1)].offsetLeft - ((window.innerWidth-slides[(currentSlide-1)].offsetWidth)/2)
+        imagePositions[projectIndex]--;
+        projectSlider.style.transform = "translateX(-"+slideOffset+"px)";
+    }
+    else if(currentSlide == 1){
+        imagePositions[projectIndex]=0;
+        projectSlider.style.transform = "translateX(0)";
+    }
 
 
 }
