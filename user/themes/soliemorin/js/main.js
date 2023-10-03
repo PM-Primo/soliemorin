@@ -223,33 +223,28 @@ function removeInfos(){
 
 // FONCTIONS MOBILE ET TABLETTE
 
-function tabletNext(e){
-    let project = e.currentTarget;
+function tabletClickRight(e){
+    let projectSlider = e.parentNode.previousElementSibling
+    let project = projectSlider.parentNode
     let slides = project.getElementsByClassName("slideshow__image");
-    let projectIndex = nodes.indexOf(e.currentTarget);
+    let projectIndex = nodes.indexOf(project);
     let currentSlide = imagePositions[projectIndex];
-    
-    if(currentSlide < slides.length-1){
-        imagePositions[projectIndex]++;
-    }
-    else{
-        imagePositions[projectIndex] = 0;
-    }
+    let overlay = project.getElementsByClassName("slideshow__overlay")[0]
 
-    tabletdisplayImages();
+    console.log(projectIndex)
+    
+    slideOffset = slides[(currentSlide+1)].offsetLeft - ((window.innerWidth-slides[(currentSlide+1)].offsetWidth)/2)
+    imagePositions[projectIndex]++;
+    project.style.transform = "translateX(-"+slideOffset+"px)";
+    overlay.style.transform = "translateX("+slideOffset+"px)";
+
 
 }
 
 // CONTRÔLES DU SLIDESHOW A LA SOURIS
 
 function addClickControls(){
-
-    if(window.matchMedia("(max-width: 1080px)").matches){
-        for(i = 2; i < projects.length - 1; i++){
-            projects[i].addEventListener('click',tabletNext, false);
-        }    
-    } 
-    else {
+    if(window.matchMedia("(min-width: 1080px)").matches){
         for(i = currentProject-2; i < currentProject+1; i++){
             projects[i].classList.remove("current_project", "prev_project", "next_project");
             projects[i].removeAttribute('onclick');

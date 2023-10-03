@@ -151,6 +151,10 @@ h1{
     cursor: url('../images/rightarrow.png'), pointer ;
 }
 
+.slideshow__overlay{
+    display:none
+}
+
 /* SLIDESHOW INFINI */
 
 .slideshow__invisible_slides{
@@ -318,9 +322,8 @@ h1{
 
     .slideshow__container{
         height: auto;
-        width: 90%;
-        margin-inline: 5%;
-        margin-top: 3.5rem;
+        width: 100%;
+        margin-top: 2rem;
         overflow: hidden;
         position: relative; 
     }
@@ -339,18 +342,21 @@ h1{
     
     .slideshow__project{
         height: auto;
+        padding-left: 1rem;
+        position: relative;
     }
     
     .slideshow__project_inner{
         display: flex;
         flex-direction: row;
-        gap: .8rem;
+        gap: .5rem;
+        /* transition: 1000ms */
     }
     
     .slideshow__image{
         object-fit: contain;
-        width: auto;
-        height: 60vh;
+        width: 90vw;
+        height: auto;
         display: block;
     }
 
@@ -360,6 +366,35 @@ h1{
         width: 89vw;
         gap: .4rem;
         font-size: .8rem;
+        margin-left: 1rem;
+    }
+
+    .slideshow__overlay{
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+        height: 100%;
+        position: absolute;
+        top:0;
+        left:0;
+    }
+
+    .overlay__right{
+        width: 50%;
+        height: 100%;
+    }
+    
+    .overlay__left{
+        width: 50%;
+        height:100%;
+    }
+    
+    .overlay__right:hover{
+        cursor: url('../images/rightarrow.png'), auto ;
+    }
+
+    .overlay__left:hover{
+        cursor: url('../images/leftarrow.png'), auto ;
     }
 
 }
