@@ -31,7 +31,8 @@
     --title-font: "Guida", sans-serif;
     --h1-font-size: 3rem;
     --normal-font-size: 1rem;
-    --icons-font-size: 1.8rem;
+    --smaller-font-size:.8rem;
+    --info-resp-font-size: .87rem;
     
 }
 
@@ -89,6 +90,15 @@ h1{
 .header__infos:hover{
     text-decoration: underline;
     cursor: url('../images/pointer.png'), pointer ;
+}
+
+.header__infos_icon{
+    display: none;
+}
+
+.header__infos_icon:hover{
+    cursor: url('../images/pointer.png'), pointer ;
+ 
 }
 
 .main__wrapper{
@@ -282,9 +292,11 @@ h1{
     overflow-y:auto;
     scrollbar-width: thin;
     scrollbar-color: var(--faded-blue) var(--main-blue);
-
 }
 
+.resp__informations_footer{
+    display: none;
+}
 
 /* INFORMATIONS SCROLLBAR */
 
@@ -365,7 +377,7 @@ h1{
         flex-direction: column;
         width: 89vw;
         gap: .4rem;
-        font-size: .8rem;
+        font-size: var(--smaller-font-size);
         margin-left: 1rem;
     }
 
@@ -397,4 +409,76 @@ h1{
         cursor: url('../images/leftarrow.png'), auto ;
     }
 
+    .informations__container{
+        font-size: var(--info-resp-font-size) ;
+    }
+    .informations__container strong{
+        font-size: var(--info-resp-font-size) ;
+    }
+
+    .informations__second_column{
+        padding: 1rem 1rem 1rem 4rem;
+    }
+
+
+}
+
+@media screen and (max-width: 700px){
+
+    .informations__content_wrapper{
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        height: 90%;
+        overflow-y:auto;
+    }
+
+    .informations__first_column{
+        width: 100%;
+        padding: 1rem 1.5rem 1rem 1.5rem;
+
+    }
+    .informations__second_column{
+        width: 100%;
+        padding: 0 1.5rem .75rem 1.5rem;
+        overflow-y:visible;
+    }
+
+    .informations__footer{
+        display: none;
+    }
+
+    .resp__informations_footer{
+        display: block;
+        margin: 0 0 .8rem 1.5rem;
+    }
+
+    .informations__content_wrapper p, ul{
+        margin-bottom: 1.25rem;
+    }
+    
+    .informations__content_wrapper ul{
+        list-style-position: inside;
+        list-style-type : "·  ";
+        margin-top: -1.25rem;
+    }
+
+    .slideshow__container{
+        height: auto;
+        width: 100%;
+        margin-top: .8rem;
+        overflow: hidden;
+        position: relative; 
+    }
+
+}
+
+@media screen and (max-width: 500px){
+    .header__infos{
+        display: none;
+    }
+
+    .header__infos_icon{
+        display: block;
+    }
 }
