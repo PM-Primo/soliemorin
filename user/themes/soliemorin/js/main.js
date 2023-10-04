@@ -231,12 +231,13 @@ function tabletClickRight(e){
     let slides = project.getElementsByClassName("slideshow__image");
     let currentSlide = imagePositions[projectIndex];
 
-    console.log(imagePositions)
-
     if(currentSlide<slides.length-1){        
         let slideOffset = slides[(currentSlide+1)].offsetLeft - ((window.innerWidth-slides[(currentSlide+1)].offsetWidth)/2)
         imagePositions[projectIndex]++;
         projectSlider.style.transform = "translateX(-"+slideOffset+"px)";
+
+        let counter = document.getElementsByClassName("resp__caption__slides_counter")[projectIndex-2];
+        counter.innerHTML = (currentSlide+2)+"/"+slides.length
     }  
 }
 
@@ -253,10 +254,15 @@ function tabletClickLeft(e){
         let slideOffset = slides[(currentSlide-1)].offsetLeft - ((window.innerWidth-slides[(currentSlide-1)].offsetWidth)/2)
         imagePositions[projectIndex]--;
         projectSlider.style.transform = "translateX(-"+slideOffset+"px)";
+
+        let counter = document.getElementsByClassName("resp__caption__slides_counter")[projectIndex-2];
+        counter.innerHTML = (currentSlide)+"/"+slides.length
     }
     else if(currentSlide == 1){
         imagePositions[projectIndex]=0;
         projectSlider.style.transform = "translateX(0)";
+        let counter = document.getElementsByClassName("resp__caption__slides_counter")[projectIndex-2];
+        counter.innerHTML = "1/"+slides.length
     }
 
 
