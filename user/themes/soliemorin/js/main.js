@@ -371,6 +371,8 @@ function handleMainTouchEnd(e){
         projectSlider.style.transform = "translateX(-"+xSlider+"px)";
     }
 
+    displayCaptions();
+
 }
 
 // RACCOURCIS CLAVIER
