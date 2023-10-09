@@ -295,6 +295,9 @@ function addTouchControls(){
         projectSlider.addEventListener('touchmove', handleMainTouchMove, false);
         projectSlider.addEventListener('touchend', handleMainTouchEnd, false);
         projects[2].setAttribute("onclick", "slideUp()")
+        projects[projects.length-1]
+        document.getElementsByClassName('slideshow__hidden_clones')[0].style.display = "none";
+        document.getElementsByClassName('slideshow__hidden_clones')[1].style.display = "none";
     }
 }
 
@@ -323,18 +326,51 @@ function handleMainTouchEnd(e){
 
     projectSlider.style.transition = "1000ms";
 
-    if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth/2)){
-        currentProject++;
-        projects[currentProject-1].removeAttribute('onclick')
-        projects[currentProject].setAttribute('onclick', 'slideUp()')
+    // Cas où le slider est calé à gauche
+    if(currentProject == 2){
+        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth/2)){
+            currentProject++;
+            projects[currentProject-1].removeAttribute('onclick')
+            projects[currentProject].setAttribute('onclick', 'slideUp()')
+            xSlider = projects[(currentProject)].offsetLeft - ((window.innerWidth-projects[(currentProject)].offsetWidth)/2);
+            projectSlider.style.transform = "translateX(-"+xSlider+"px)";
+        }
+        else{
+            xSlider = 0;
+            projectSlider.style.transform = "translateX(0px)";
+        }
     }
-    else if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth/2)){
-        currentProject--;
-        projects[currentProject+1].removeAttribute('onclick')
-        projects[currentProject].setAttribute('onclick', 'slideUp()')
+    // Cas où le slider est calé à droite
+    else if(currentProject == projects.length-3){
+        if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth/2)){
+            currentProject--;
+            projects[currentProject+1].removeAttribute('onclick')
+            projects[currentProject].setAttribute('onclick', 'slideUp()')
+        }
+        xSlider = projects[(currentProject)].offsetLeft - ((window.innerWidth-projects[(currentProject)].offsetWidth)/2);
+        projectSlider.style.transform = "translateX(-"+xSlider+"px)";
     }
-    xSlider = projects[(currentProject)].offsetLeft - ((window.innerWidth-projects[(currentProject)].offsetWidth)/2);
-    projectSlider.style.transform = "translateX(-"+xSlider+"px)";
+    // Tous les autres cas
+    else{
+        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth/2)){
+            currentProject++;
+            projects[currentProject-1].removeAttribute('onclick')
+            projects[currentProject].setAttribute('onclick', 'slideUp()')
+        }
+        else if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth/2)){
+            currentProject--;
+            projects[currentProject+1].removeAttribute('onclick')
+            projects[currentProject].setAttribute('onclick', 'slideUp()')
+        }
+        if(currentProject == 2){
+            xSlider = 0
+        }
+        else{
+            xSlider = projects[(currentProject)].offsetLeft - ((window.innerWidth-projects[(currentProject)].offsetWidth)/2);
+        }
+        projectSlider.style.transform = "translateX(-"+xSlider+"px)";
+    }
+
 }
 
 // RACCOURCIS CLAVIER
