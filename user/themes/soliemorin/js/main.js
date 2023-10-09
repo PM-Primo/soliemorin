@@ -12,14 +12,17 @@ let imagePositions = Array(projects.length).fill(0);
 
 let leftLock = true;
 
+let xStart = 0;
+let xSlider = 0;
+let xDelta = 0;
+
 if(window.matchMedia("(min-width: 1080px)").matches){
     displayImages();
-    displayCaptions();
-
-    console.log("grand écran !")
-    
+    displayCaptions();    
 }
+
 addClickControls();
+addTouchControls();
 
 function displayImages(){
     for(i = 0; i < projects.length; i++){
@@ -271,7 +274,7 @@ function tabletClickLeft(e){
 // CONTRÔLES DU SLIDESHOW A LA SOURIS
 
 function addClickControls(){
-    if(window.matchMedia("(min-width: 1080px)").matches){
+    if(window.matchMedia("(min-width: 1080px)").matches && !window.matchMedia("(pointer: coarse)").matches){
         for(i = currentProject-2; i < currentProject+1; i++){
             projects[i].classList.remove("current_project", "prev_project", "next_project");
             projects[i].removeAttribute('onclick');
@@ -284,6 +287,54 @@ function addClickControls(){
         projects[currentProject-1].setAttribute('onclick','slideLeft()')
         projects[currentProject+1].setAttribute('onclick','slideRight()')
     }
+}
+
+function addTouchControls(){
+    if(window.matchMedia("(min-width: 1080px)").matches && window.matchMedia("(pointer: coarse)").matches){
+        projectSlider.addEventListener('touchstart', handleMainTouchStart, false);
+        projectSlider.addEventListener('touchmove', handleMainTouchMove, false);
+        projectSlider.addEventListener('touchend', handleMainTouchEnd, false);
+        projects[2].setAttribute("onclick", "slideUp()")
+    }
+}
+
+// CONTRÔLES TACTILES VERSION DESKTOP
+
+function handleMainTouchStart(e){
+    xStart = e.touches[0].clientX;
+}
+
+function handleMainTouchMove(e){
+    xDelta = xStart-e.touches[0].clientX
+    // xDelta : + si on slide vers la gauche / - si on slide vers la droite
+
+    projectSlider.style.transition = "none";
+
+    if(xSlider==0 && xDelta<0){
+        xStart = e.touches[0].clientX;
+        xDelta = 0;
+    }
+    else{
+        projectSlider.style.transform = "translateX(-"+(xSlider+xDelta)+"px)";
+    }
+}
+
+function handleMainTouchEnd(e){
+
+    projectSlider.style.transition = "1000ms";
+
+    if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth/2)){
+        currentProject++;
+        projects[currentProject-1].removeAttribute('onclick')
+        projects[currentProject].setAttribute('onclick', 'slideUp()')
+    }
+    else if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth/2)){
+        currentProject--;
+        projects[currentProject+1].removeAttribute('onclick')
+        projects[currentProject].setAttribute('onclick', 'slideUp()')
+    }
+    xSlider = projects[(currentProject)].offsetLeft - ((window.innerWidth-projects[(currentProject)].offsetWidth)/2);
+    projectSlider.style.transform = "translateX(-"+xSlider+"px)";
 }
 
 // RACCOURCIS CLAVIER
@@ -300,7 +351,6 @@ function checkKeyPressed(e) {
     if (e.keyCode == "40") {
         slideUp();
     }
-
     if (e.keyCode == "38") {
         slideDown();
     }
