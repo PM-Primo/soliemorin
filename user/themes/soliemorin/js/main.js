@@ -14,6 +14,7 @@ let leftLock = true;
 
 let xStart = 0;
 let xSlider = 0;
+let xPhoneSliders = Array(projects.length).fill(0)
 let xDelta = 0;
 
 if(window.matchMedia("(min-width: 1080px)").matches){
@@ -23,6 +24,7 @@ if(window.matchMedia("(min-width: 1080px)").matches){
 
 addClickControls();
 addTouchControls();
+addPhoneControls();
 
 function displayImages(){
     for(i = 0; i < projects.length; i++){
@@ -224,7 +226,8 @@ function removeInfos(){
     infoBox.classList.remove("informations__on");
 }
 
-// FONCTIONS MOBILE ET TABLETTE
+// FONCTIONS NON TACTILES PETITS ECRANS
+
 
 function tabletClickRight(e){
 
@@ -268,7 +271,6 @@ function tabletClickLeft(e){
         counter.innerHTML = "1/"+slides.length
     }
 
-
 }
 
 // CONTRÔLES DU SLIDESHOW A LA SOURIS
@@ -291,7 +293,7 @@ function addClickControls(){
 
 function addTouchControls(){
     if(window.matchMedia("(min-width: 1080px)").matches && window.matchMedia("(pointer: coarse)").matches){
-        projectSlider.addEventListener('touchstart', handleMainTouchStart, false);
+        projectSlider.addEventListener('touchstart', handleTouchStart, false);
         projectSlider.addEventListener('touchmove', handleMainTouchMove, false);
         projectSlider.addEventListener('touchend', handleMainTouchEnd, false);
         projects[2].setAttribute("onclick", "slideUp()")
@@ -301,9 +303,24 @@ function addTouchControls(){
     }
 }
 
+function addPhoneControls(){
+    if(window.matchMedia("(max-width: 1080px)").matches && window.matchMedia("(pointer: coarse)").matches){
+        let overlays = document.getElementsByClassName("slideshow__overlay");
+        let sliders = document.getElementsByClassName("slideshow__project_inner")
+        for(i = 0; i < overlays.length; i++){
+            overlays[i].style.display = "none";
+        }
+        for(i = 2; i < sliders.length-2; i++){
+            sliders[i].addEventListener('touchstart', handleTouchStart, false);
+            sliders[i].addEventListener('touchmove', handlePhoneTouchMove, false);
+            sliders[i].addEventListener('touchend', handlePhoneTouchEnd, false);
+        }
+    }
+}
+
 // CONTRÔLES TACTILES VERSION DESKTOP
 
-function handleMainTouchStart(e){
+function handleTouchStart(e){
     xStart = e.touches[0].clientX;
 }
 
@@ -372,6 +389,74 @@ function handleMainTouchEnd(e){
     }
 
     displayCaptions();
+
+}
+
+function handlePhoneTouchMove(e){
+    currentSlider = e.target.parentNode;
+    xDelta = xStart-e.touches[0].clientX
+
+    let project = currentSlider.parentNode
+    let projectIndex = nodes.indexOf(project);
+
+    // xDelta : + si on slide vers la gauche / - si on slide vers la droite
+
+    currentSlider.style.transition = "none";
+
+    if(xPhoneSliders[projectIndex]==0 && xDelta<0){
+        xStart = e.touches[0].clientX;
+        xDelta = 0;
+    }
+    else{
+        currentSlider.style.transform = "translateX(-"+(xPhoneSliders[projectIndex]+xDelta)+"px)";
+    }
+}
+
+function handlePhoneTouchEnd(e){
+    let currentSlider = e.target.parentNode;
+    let project = currentSlider.parentNode
+    let projectIndex = nodes.indexOf(project);
+    let slides = project.getElementsByClassName("slideshow__image");
+    let currentSlide = imagePositions[projectIndex];
+    
+    currentSlider.style.transition = "1000ms";
+
+    if(currentSlide == 0){
+        if(slides[currentSlide+1].getBoundingClientRect().left < (window.innerWidth/2)){
+            imagePositions[projectIndex]++;
+            xPhoneSliders[projectIndex] = slides[(currentSlide+1)].offsetLeft - ((window.innerWidth-slides[(currentSlide)].offsetWidth)/2);
+            currentSlider.style.transform = "translateX(-"+xPhoneSliders[projectIndex]+"px)";
+        }
+        else{
+            xPhoneSliders[projectIndex] = 0;
+            currentSlider.style.transform = "translateX(0px)";
+        }
+    }
+    else if(currentSlide == slides.length-1){
+        if(slides[currentSlide-1].getBoundingClientRect().right > (window.innerWidth/2)){
+            imagePositions[projectIndex]--;
+            currentSlide--;
+        }
+        xPhoneSliders[projectIndex] = slides[(currentSlide)].offsetLeft - ((window.innerWidth-slides[(currentSlide)].offsetWidth)/2);
+        currentSlider.style.transform = "translateX(-"+xPhoneSliders[projectIndex]+"px)";
+    }
+    else{
+        if(slides[currentSlide+1].getBoundingClientRect().left < (window.innerWidth/2)){
+            imagePositions[projectIndex]++;
+            currentSlide++;
+        }
+        else if(slides[currentSlide-1].getBoundingClientRect().right > (window.innerWidth/2)){
+            imagePositions[projectIndex]--;
+            currentSlide--;
+        }
+        if(currentSlide == 0){
+            xPhoneSliders[projectIndex] = 0;
+        }
+        else{
+            xPhoneSliders[projectIndex] = slides[(currentSlide)].offsetLeft - ((window.innerWidth-slides[(currentSlide)].offsetWidth)/2);
+        }
+        currentSlider.style.transform = "translateX(-"+xPhoneSliders[projectIndex]+"px)";
+    }
 
 }
 
