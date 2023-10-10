@@ -1,30 +1,99 @@
 
-// FONCTIONNEMENT DU SLIDESHOW
-
+// VARIABLES GLOBALES
 
 let projects = document.getElementsByClassName("slideshow__project");
 let nodes = Array.prototype.slice.call(projects);
 let currentProject = 2;
 let posProject = 0;
-let projectSlider = document.getElementById("slideshow__inner")
-
+let projectSlider = document.getElementById("slideshow__inner");
 let imagePositions = Array(projects.length).fill(0);
 
+// Lock du scroll infini à gauche
 let leftLock = true;
 
+// Variables de gestion des sliders en version tactile
 let xStart = 0;
 let xSlider = 0;
 let xPhoneSliders = Array(projects.length).fill(0)
 let xDelta = 0;
 
+//AJOUT DES DIFFERENTS EVENTLISTENERS
 if(window.matchMedia("(min-width: 1080px)").matches){
+    if(window.matchMedia("(pointer: coarse)").matches){
+        addTouchControls();
+    }
+    else{
+        addClickControls();
+    }
+    window.addEventListener("keydown", checkKeyPressed, false);
     displayImages();
     displayCaptions();    
 }
+else{
+    if(window.matchMedia("(pointer: coarse)").matches){
+        addPhoneControls();
+    }
+}
 
-addClickControls();
-addTouchControls();
-addPhoneControls();
+
+// Contrôles à la souris
+function addClickControls(){
+    for(i = currentProject-2; i < currentProject+1; i++){
+        projects[i].classList.remove("current_project", "prev_project", "next_project");
+        projects[i].removeAttribute('onclick');
+    }
+
+    projects[currentProject].classList.add("current_project");
+    projects[currentProject-1].classList.add("prev_project");
+    projects[currentProject+1].classList.add("next_project");
+    projects[currentProject].setAttribute('onclick','slideUp()')
+    projects[currentProject-1].setAttribute('onclick','slideLeft()')
+    projects[currentProject+1].setAttribute('onclick','slideRight()')
+}
+
+// Contrôles au clavier
+function checkKeyPressed(e) {
+    if (e.keyCode == "37") {
+        slideLeft();
+    }
+    if (e.keyCode == "39") {
+        slideRight();
+    }
+    if (e.keyCode == "40") {
+        slideUp();
+    }
+    if (e.keyCode == "38") {
+        slideDown();
+    }
+}
+
+// Contrôles tactiles version desktop
+function addTouchControls(){
+    projectSlider.addEventListener('touchstart', handleTouchStart, false);
+    projectSlider.addEventListener('touchmove', handleMainTouchMove, false);
+    projectSlider.addEventListener('touchend', handleMainTouchEnd, false);
+    projects[2].setAttribute("onclick", "slideUp()")
+    projects[projects.length-1]
+    document.getElementsByClassName('slideshow__hidden_clones')[0].style.display = "none";
+    document.getElementsByClassName('slideshow__hidden_clones')[1].style.display = "none";
+}
+
+// Contrôles tactiles version mobile
+function addPhoneControls(){
+    let overlays = document.getElementsByClassName("slideshow__overlay");
+    let sliders = document.getElementsByClassName("slideshow__project_inner")
+    for(i = 0; i < overlays.length; i++){
+        overlays[i].style.display = "none";
+    }
+    for(i = 2; i < sliders.length-2; i++){
+        sliders[i].addEventListener('touchstart', handleTouchStart, false);
+        sliders[i].addEventListener('touchmove', handlePhoneTouchMove, false);
+        sliders[i].addEventListener('touchend', handlePhoneTouchEnd, false);
+    }
+}
+
+
+// AFFICHAGE DES SLIDES CORRESPONDANT A imagePositions
 
 function displayImages(){
     for(i = 0; i < projects.length; i++){
@@ -35,6 +104,8 @@ function displayImages(){
         slides[imagePositions[i]].style.display="block";
     }
 }
+
+// AFFICHAGE DES LEGENDES ET DES COMPTEURS
 
 function displayCaptions(){
     let captions = document.getElementsByClassName("caption__project");
@@ -50,6 +121,8 @@ function displayCaptions(){
         }
     }
 }
+
+// FONCTIONS DE DEFILEMENT - VERSION DESKTOP
 
 function slideRight(){
     if(currentProject < projects.length -3){
@@ -87,7 +160,6 @@ function slideRight(){
 
 function slideLeft(){
         
-
     if(currentProject == 3 && leftLock == true ){
         currentProject--;
         projectSlider.style.transform = "translateX(0px)";
@@ -162,9 +234,7 @@ function slideUp(){
             imagePositions[0] = 0;
         }
     }
-
     displayImages();
-
 }
 
 function slideDown(){ 
@@ -209,25 +279,10 @@ function slideDown(){
             imagePositions[0] = slides.length-1;
         }    
     }
-
     displayImages();
-
 }
 
-// AFFICHAGE DES INFORMATIONS
-
-function displayInfos(){
-    let infoBox = document.getElementById("informations__container");
-    infoBox.classList.add("informations__on");
-}
-
-function removeInfos(){
-    let infoBox = document.getElementById("informations__container");
-    infoBox.classList.remove("informations__on");
-}
-
-// FONCTIONS NON TACTILES PETITS ECRANS
-
+// FONCTIONS DE DEFILEMENT - RESPONSIVE NON TACTILE
 
 function tabletClickRight(e){
 
@@ -273,52 +328,7 @@ function tabletClickLeft(e){
 
 }
 
-// CONTRÔLES DU SLIDESHOW A LA SOURIS
-
-function addClickControls(){
-    if(window.matchMedia("(min-width: 1080px)").matches && !window.matchMedia("(pointer: coarse)").matches){
-        for(i = currentProject-2; i < currentProject+1; i++){
-            projects[i].classList.remove("current_project", "prev_project", "next_project");
-            projects[i].removeAttribute('onclick');
-        }
-    
-        projects[currentProject].classList.add("current_project");
-        projects[currentProject-1].classList.add("prev_project");
-        projects[currentProject+1].classList.add("next_project");
-        projects[currentProject].setAttribute('onclick','slideUp()')
-        projects[currentProject-1].setAttribute('onclick','slideLeft()')
-        projects[currentProject+1].setAttribute('onclick','slideRight()')
-    }
-}
-
-function addTouchControls(){
-    if(window.matchMedia("(min-width: 1080px)").matches && window.matchMedia("(pointer: coarse)").matches){
-        projectSlider.addEventListener('touchstart', handleTouchStart, false);
-        projectSlider.addEventListener('touchmove', handleMainTouchMove, false);
-        projectSlider.addEventListener('touchend', handleMainTouchEnd, false);
-        projects[2].setAttribute("onclick", "slideUp()")
-        projects[projects.length-1]
-        document.getElementsByClassName('slideshow__hidden_clones')[0].style.display = "none";
-        document.getElementsByClassName('slideshow__hidden_clones')[1].style.display = "none";
-    }
-}
-
-function addPhoneControls(){
-    if(window.matchMedia("(max-width: 1080px)").matches && window.matchMedia("(pointer: coarse)").matches){
-        let overlays = document.getElementsByClassName("slideshow__overlay");
-        let sliders = document.getElementsByClassName("slideshow__project_inner")
-        for(i = 0; i < overlays.length; i++){
-            overlays[i].style.display = "none";
-        }
-        for(i = 2; i < sliders.length-2; i++){
-            sliders[i].addEventListener('touchstart', handleTouchStart, false);
-            sliders[i].addEventListener('touchmove', handlePhoneTouchMove, false);
-            sliders[i].addEventListener('touchend', handlePhoneTouchEnd, false);
-        }
-    }
-}
-
-// CONTRÔLES TACTILES VERSION DESKTOP
+// FONCTIONS DE SWIPE TACTILE - VERSION DESKTOP
 
 function handleTouchStart(e){
     xStart = e.touches[0].clientX;
@@ -392,6 +402,8 @@ function handleMainTouchEnd(e){
 
 }
 
+// FONCTIONS DE SWIPE TACTILE - VERSION MOBILE
+
 function handlePhoneTouchMove(e){
     currentSlider = e.target.parentNode;
     xDelta = xStart-e.touches[0].clientX
@@ -424,8 +436,10 @@ function handlePhoneTouchEnd(e){
     if(currentSlide == 0){
         if(slides[currentSlide+1].getBoundingClientRect().left < (window.innerWidth/2)){
             imagePositions[projectIndex]++;
-            xPhoneSliders[projectIndex] = slides[(currentSlide+1)].offsetLeft - ((window.innerWidth-slides[(currentSlide)].offsetWidth)/2);
+            currentSlide++;
+            xPhoneSliders[projectIndex] = slides[(currentSlide)].offsetLeft - ((window.innerWidth-slides[(currentSlide)].offsetWidth)/2);
             currentSlider.style.transform = "translateX(-"+xPhoneSliders[projectIndex]+"px)";
+
         }
         else{
             xPhoneSliders[projectIndex] = 0;
@@ -458,24 +472,18 @@ function handlePhoneTouchEnd(e){
         currentSlider.style.transform = "translateX(-"+xPhoneSliders[projectIndex]+"px)";
     }
 
+    let counter = document.getElementsByClassName("resp__caption__slides_counter")[projectIndex-2];
+    counter.innerHTML = (currentSlide+1)+"/"+slides.length;
 }
 
-// RACCOURCIS CLAVIER
-window.addEventListener("keydown", checkKeyPressed, false);
+// AFFICHAGE DES INFORMATIONS
 
-function checkKeyPressed(e) {
+function displayInfos(){
+    let infoBox = document.getElementById("informations__container");
+    infoBox.classList.add("informations__on");
+}
 
-    if (e.keyCode == "37") {
-        slideLeft();
-    }
-    if (e.keyCode == "39") {
-        slideRight();
-    }
-    if (e.keyCode == "40") {
-        slideUp();
-    }
-    if (e.keyCode == "38") {
-        slideDown();
-    }
-
+function removeInfos(){
+    let infoBox = document.getElementById("informations__container");
+    infoBox.classList.remove("informations__on");
 }
