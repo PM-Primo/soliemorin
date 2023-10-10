@@ -336,6 +336,11 @@ h1{
 
 @media screen and (max-width: 1080px){
 
+    .header{
+        height: auto;
+        padding-top: 1rem;
+    }
+
     .slideshow__container{
         height: auto;
         width: 100%;
@@ -383,6 +388,7 @@ h1{
         gap: .4rem;
         font-size: var(--smaller-font-size);
         margin-left: 1rem;
+        margin-bottom: 1.2rem;
     }
 
     .slideshow__overlay{
