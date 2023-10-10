@@ -35,6 +35,7 @@ else{
     }
 }
 
+window.onresize = function(){ location.reload(); }
 
 // Contrôles à la souris
 function addClickControls(){
@@ -481,9 +482,11 @@ function handlePhoneTouchEnd(e){
 function displayInfos(){
     let infoBox = document.getElementById("informations__container");
     infoBox.classList.add("informations__on");
+    document.body.classList.add("body__noscroll");
 }
 
 function removeInfos(){
     let infoBox = document.getElementById("informations__container");
     infoBox.classList.remove("informations__on");
+    document.body.classList.remove("body__noscroll");
 }

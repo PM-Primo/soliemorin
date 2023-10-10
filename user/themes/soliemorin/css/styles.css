@@ -298,6 +298,10 @@ h1{
     display: none;
 }
 
+.body__noscroll {
+    overflow: hidden;
+}
+
 /* INFORMATIONS SCROLLBAR */
 
 ::-webkit-scrollbar {
