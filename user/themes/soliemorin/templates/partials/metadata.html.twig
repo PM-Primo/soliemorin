@@ -1,12 +1,2 @@
-{% for meta in page.metadata %}
-    <meta {% if meta.name %}name="{{ meta.name }}" {% endif %}{% if meta.http_equiv %}http-equiv="{{ meta.http_equiv }}" {% endif %}{% if meta.charset %}charset="{{ meta.charset }}" {% endif %}{% if meta.property %}property="{{ meta.property }}" {% endif %}{% if meta.content %}content="{{ meta.content }}" {% endif %}/>
-
-    {% if page.template == "restaurant" or page.parent.template == "restaurant" %}
-        <meta name="description" content="{{page.header.custom.seoDescription}}">
-        <meta name="keywords" content="{{page.header.custom.seoKeywords}}">
-    {% else %}
-        <meta name="description" content="{{page.find('/a-propos').header.custom.seoDescription}}">
-        <meta name="keywords" content="{{page.find('/a-propos').header.custom.seoKeywords}}">
-    {% endif %}
-
-{% endfor %}
+<meta name="description" content="Graphiste indépendante, Solie Morin est spécialisée dans la conception d’identités visuelles, 
+    de signalétiques, d’objets éditoriaux et de supports de communication pour des sujets culturels et sociaux.">
