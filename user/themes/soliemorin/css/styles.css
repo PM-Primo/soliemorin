@@ -410,6 +410,11 @@ h1{
         width: 50%;
         height:100%;
     }
+
+    .overlay__neutral{
+        width: 50%;
+        height: 100%;
+    }
     
     .overlay__right:hover{
         cursor: url('../images/rightarrow.png'), auto ;
@@ -417,6 +422,10 @@ h1{
 
     .overlay__left:hover{
         cursor: url('../images/leftarrow.png'), auto ;
+    }
+
+    .overlay__neutral:hover{
+        cursor: url('../images/cursor.png'), auto ;
     }
 
     .informations__container{

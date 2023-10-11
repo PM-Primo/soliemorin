@@ -13,9 +13,12 @@ let leftLock = true;
 
 // Variables de gestion des sliders en version tactile
 let xStart = 0;
+let yStart = 0
 let xSlider = 0;
 let xPhoneSliders = Array(projects.length).fill(0)
 let xDelta = 0;
+let angleChecked = false;
+let angle;
 
 //AJOUT DES DIFFERENTS EVENTLISTENERS
 if(window.matchMedia("(min-width: 1080px)").matches){
@@ -292,15 +295,23 @@ function tabletClickRight(e){
     let projectIndex = nodes.indexOf(project);
     let slides = project.getElementsByClassName("slideshow__image");
     let currentSlide = imagePositions[projectIndex];
-
+    
     if(currentSlide<slides.length-1){        
+        if(currentSlide == 0){
+            e.previousElementSibling.classList.remove("overlay__neutral")
+            e.previousElementSibling.classList.add("overlay__left")
+        }
+        if(currentSlide == slides.length-2){
+            e.classList.remove("overlay__right")
+            e.classList.add("overlay__neutral")
+        }
         let slideOffset = slides[(currentSlide+1)].offsetLeft - ((window.innerWidth-slides[(currentSlide+1)].offsetWidth)/2)
         imagePositions[projectIndex]++;
         projectSlider.style.transform = "translateX(-"+slideOffset+"px)";
 
         let counter = document.getElementsByClassName("resp__caption__slides_counter")[projectIndex-2];
         counter.innerHTML = (currentSlide+2)+"/"+slides.length
-    }  
+    }
 }
 
 function tabletClickLeft(e){
@@ -313,6 +324,11 @@ function tabletClickLeft(e){
     
 
     if(currentSlide > 1){
+        if(currentSlide == slides.length-1){
+            e.nextElementSibling.classList.remove("overlay__neutral");
+            e.nextElementSibling.classList.add("overlay__right");
+        }
+
         let slideOffset = slides[(currentSlide-1)].offsetLeft - ((window.innerWidth-slides[(currentSlide-1)].offsetWidth)/2)
         imagePositions[projectIndex]--;
         projectSlider.style.transform = "translateX(-"+slideOffset+"px)";
@@ -321,10 +337,12 @@ function tabletClickLeft(e){
         counter.innerHTML = (currentSlide)+"/"+slides.length
     }
     else if(currentSlide == 1){
+        e.classList.remove("overlay__left");
+        e.classList.add("overlay__neutral");
         imagePositions[projectIndex]=0;
         projectSlider.style.transform = "translateX(0)";
         let counter = document.getElementsByClassName("resp__caption__slides_counter")[projectIndex-2];
-        counter.innerHTML = "1/"+slides.length
+        counter.innerHTML = "1/"+slides.length;
     }
 
 }
@@ -333,6 +351,7 @@ function tabletClickLeft(e){
 
 function handleTouchStart(e){
     xStart = e.touches[0].clientX;
+    yStart = e.touches[0].clientY;
 }
 
 function handleMainTouchMove(e){
@@ -416,13 +435,23 @@ function handlePhoneTouchMove(e){
 
     currentSlider.style.transition = "none";
 
-    if(xPhoneSliders[projectIndex]==0 && xDelta<0){
-        xStart = e.touches[0].clientX;
-        xDelta = 0;
+    if (!angleChecked){
+        angle = checkAngle(xStart, yStart, e.touches[0].clientX, e.touches[0].clientY)
     }
-    else{
-        currentSlider.style.transform = "translateX(-"+(xPhoneSliders[projectIndex]+xDelta)+"px)";
+
+    if(angleChecked){
+        if(angle == "swipe"){
+            document.body.classList.add("body__noscroll");
+            if(xPhoneSliders[projectIndex]==0 && xDelta<0){
+                xStart = e.touches[0].clientX;
+                xDelta = 0;
+            }
+            else{
+                currentSlider.style.transform = "translateX(-"+(xPhoneSliders[projectIndex]+xDelta)+"px)";
+            }
+        }
     }
+
 }
 
 function handlePhoneTouchEnd(e){
@@ -431,7 +460,9 @@ function handlePhoneTouchEnd(e){
     let projectIndex = nodes.indexOf(project);
     let slides = project.getElementsByClassName("slideshow__image");
     let currentSlide = imagePositions[projectIndex];
-    
+
+    angleChecked = false
+    document.body.classList.remove("body__noscroll");
     currentSlider.style.transition = "1000ms";
 
     if(currentSlide == 0){
@@ -475,6 +506,21 @@ function handlePhoneTouchEnd(e){
 
     let counter = document.getElementsByClassName("resp__caption__slides_counter")[projectIndex-2];
     counter.innerHTML = (currentSlide+1)+"/"+slides.length;
+}
+
+// CALCUL DE L'ANGLE DE DEPLACEMENT TACTILE
+function checkAngle(x1, y1, x2, y2){
+    let deltaX = Math.abs(x2-x1);
+    let deltaY = Math.abs(y2-y1);
+
+    angleChecked = true;
+
+    if(deltaY>deltaX){
+        return "scroll";
+    }
+    else{
+        return "swipe";
+    }
 }
 
 // AFFICHAGE DES INFORMATIONS
