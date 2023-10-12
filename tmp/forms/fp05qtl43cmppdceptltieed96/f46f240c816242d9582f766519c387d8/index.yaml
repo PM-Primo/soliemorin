@@ -1,0 +1,31 @@
+form: flex-pages
+id: 'tmp://forms/session/f46f240c816242d9582f766519c387d8'
+unique_id: f46f240c816242d9582f766519c387d8
+url: '/pages/projets/08-nouvelle-page/:add'
+user:
+  username: solie_morin
+  email: solie@soliemorin.fr
+timestamps:
+  created: 1697102635
+  updated: 1697102635
+data: null
+files: {  }
+object:
+  type: pages
+  key: projets/08-nouvelle-page
+  storage_key: ''
+  timestamp: 0
+  serialized:
+    __META: {  }
+    storage_key: ''
+    parent_key: projets
+    order: false
+    folder: 08-nouvelle-page
+    template: project
+    lang: ''
+    root: false
+    route: /projets
+    name: project
+    header:
+      title: '08 - Nouvelle Page'
+    frontmatter: "title: '08 - Nouvelle Page'\n"

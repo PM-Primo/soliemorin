@@ -154,11 +154,11 @@ h1{
 }
 
 .prev_project:hover{
-    cursor: url('../images/leftarrow.png'), pointer ;
+    cursor: url('../images/GAUCHE.svg'), pointer ;
 }
 
 .next_project:hover{
-    cursor: url('../images/rightarrow.png'), pointer ;
+    cursor: url('../images/DROITE.svg'), pointer ;
 }
 
 .slideshow__overlay{
@@ -417,11 +417,11 @@ h1{
     }
     
     .overlay__right:hover{
-        cursor: url('../images/rightarrow.png'), auto ;
+        cursor: url('../images/DROITE.svg'), auto ;
     }
 
     .overlay__left:hover{
-        cursor: url('../images/leftarrow.png'), auto ;
+        cursor: url('../images/GAUCHE.svg'), auto ;
     }
 
     .overlay__neutral:hover{

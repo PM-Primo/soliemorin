@@ -81,9 +81,9 @@ form:
                     .alt:
                       label: Description de l'image pour le référencement et les mal-voyants (exemple – vue de la signalétique du Frac Sud)
                       type: Text
-                    .video:
-                      type: text
-                      label: Vidéo – Lien de la vidéo vimeo ou youtube si seule (avec https:// ).
+                    # .video:
+                    #   type: text
+                    #   label: Vidéo – Lien de la vidéo vimeo ou youtube si seule (avec https:// ).
                     
             header.media_order:
               type: pagemedia
