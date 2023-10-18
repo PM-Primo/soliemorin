@@ -1,4 +1,3 @@
-
 // VARIABLES GLOBALES
 
 let projects = document.getElementsByClassName("slideshow__project");
@@ -20,8 +19,11 @@ let xDelta = 0;
 let angleChecked = false;
 let angle;
 
+// Variable pour le resize
+let initWidth = window.innerWidth
+
 //AJOUT DES DIFFERENTS EVENTLISTENERS
-if(window.matchMedia("(min-width: 1080px)").matches){
+if(window.matchMedia("(min-width: 870px)").matches){
     if(window.matchMedia("(pointer: coarse)").matches){
         addTouchControls();
     }
@@ -38,7 +40,11 @@ else{
     }
 }
 
-window.onresize = function(){ location.reload(); }
+window.onresize = function(){ 
+    if (window.innerWidth !== initWidth ) {
+        location.reload(); 
+    }
+}
 
 // Contrôles à la souris
 function addClickControls(){

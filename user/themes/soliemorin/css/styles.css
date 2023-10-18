@@ -206,7 +206,7 @@ h1{
     color:var(--main-blue);
     -webkit-text-stroke: 1px var(--main-white);
     text-stroke: 1px var(--main-white);
-    cursor: url('../images/pointer.png');
+    cursor: url('../images/pointer.png'), pointer;
 }
 
 .informations__close_icon{
@@ -298,6 +298,15 @@ h1{
     display: none;
 }
 
+.footer__link{
+    color: var(--main-white);
+}
+
+.footer__link:hover{
+    cursor: url('../images/pointer.png'), pointer;
+    color: var(--faded-blue);
+}
+
 .body__noscroll {
     overflow: hidden;
 }
@@ -334,7 +343,7 @@ h1{
     }
 }
 
-@media screen and (max-width: 1080px){
+@media screen and (max-width: 870px){
 
     .header{
         height: auto;
