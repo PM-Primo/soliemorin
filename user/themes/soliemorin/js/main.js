@@ -542,3 +542,9 @@ function removeInfos(){
     infoBox.classList.remove("informations__on");
     document.body.classList.remove("body__noscroll");
 }
+
+//RELOAD
+
+function reload(){
+    location.reload();
+}

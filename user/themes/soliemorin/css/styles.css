@@ -32,6 +32,7 @@
     --h1-font-size: 3rem;
     --normal-font-size: 1rem;
     --smaller-font-size:.8rem;
+    --captions-font-size: .9rem;
     --info-resp-font-size: .87rem;
     
 }
@@ -71,6 +72,15 @@ h1{
     text-transform: uppercase;
 }
 
+img {  
+    user-drag: none;  
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+ }
+
 /* HEADER */
 
 .header{
@@ -105,6 +115,10 @@ h1{
     height: 100%;
     width: 100%;
     overflow: hidden;
+}
+
+.header__logo:hover{
+    cursor: url('../images/pointer.png'), pointer ;
 }
 
 /* SLIDESHOW */
@@ -180,6 +194,7 @@ h1{
     align-items: center;
     justify-content: space-between;
     padding: 0 1rem 0 1rem;
+    font-size: var(--captions-font-size);
 }
 
 .caption__project{
@@ -294,6 +309,10 @@ h1{
     scrollbar-color: var(--faded-blue) var(--main-blue);
 }
 
+.informations__container a{
+    color: var(--main-white);
+}
+
 .resp__informations_footer{
     display: none;
 }
@@ -361,7 +380,7 @@ h1{
     .slideshow__inner{
         display: flex;
         flex-direction: column;
-        gap: 1.2rem;
+        gap: .5rem;
         transition: 0;
         padding-left: 0;
     }
@@ -397,7 +416,7 @@ h1{
         gap: .4rem;
         font-size: var(--smaller-font-size);
         margin-left: 1rem;
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.1rem;
     }
 
     .slideshow__overlay{
