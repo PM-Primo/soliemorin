@@ -46,6 +46,17 @@ window.onresize = function(){
     }
 }
 
+//Initialisation du LazyLoad
+
+function lazyLoadNewProject(project){
+    slides = project.getElementsByClassName("slideshow__image");
+    loadImg(slides[slides.length-1])
+    loadImg(slides[1]);
+    loadImg(slides[2]);
+}
+
+lazyLoadNewProject(projects[2]);
+
 // Contrôles à la souris
 function addClickControls(){
     for(i = currentProject-2; i < currentProject+1; i++){
@@ -139,6 +150,7 @@ function slideRight(){
         posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
         currentProject++;
         projectSlider.style.transform = "translateX(-"+posProject+"px)";
+        lazyLoadNewProject(projects[currentProject]);
     }
     else if(currentProject == projects.length -3){
         posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
@@ -225,6 +237,9 @@ function slideUp(){
         else if(currentProject == (projects.length - 4) ){
             imagePositions[0]++;
         }
+        if(currentSlide+2<slides.length-1){
+            loadImg(slides[currentSlide+2]);
+        }
     }
     else{
         imagePositions[currentProject] = 0;
@@ -270,6 +285,7 @@ function slideDown(){
         else if(currentProject == (projects.length - 4) ){
             imagePositions[0]--;
         }
+        loadImg(slides[currentSlide-1]);
     }
     else{
         imagePositions[currentProject] = slides.length-1;
@@ -547,4 +563,13 @@ function removeInfos(){
 
 function reload(){
     location.reload();
+}
+
+// LAZYLOAD
+
+function loadImg(image){
+    if(image.classList.contains("unloaded")){
+        image.src = image.dataset.src;
+        image.classList.remove("unloaded");
+    }
 }
