@@ -326,7 +326,7 @@ img {
     color: var(--faded-blue);
 }
 
-.body__noscroll {
+.noscroll {
     overflow: hidden;
 }
 

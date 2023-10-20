@@ -403,6 +403,7 @@ function handleMainTouchEnd(e){
             projects[currentProject].setAttribute('onclick', 'slideUp()')
             xSlider = projects[(currentProject)].offsetLeft - ((window.innerWidth-projects[(currentProject)].offsetWidth)/2);
             projectSlider.style.transform = "translateX(-"+xSlider+"px)";
+            lazyLoadNewProject(projects[currentProject]);
         }
         else{
             xSlider = 0;
@@ -425,6 +426,7 @@ function handleMainTouchEnd(e){
             currentProject++;
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
+            projects[currentProject]
         }
         else if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth/2)){
             currentProject--;
@@ -463,7 +465,8 @@ function handlePhoneTouchMove(e){
 
     if(angleChecked){
         if(angle == "swipe"){
-            document.body.classList.add("body__noscroll");
+            document.body.classList.add("noscroll");
+            document.documentElement.classList.add("noscroll");
             if(xPhoneSliders[projectIndex]==0 && xDelta<0){
                 xStart = e.touches[0].clientX;
                 xDelta = 0;
@@ -484,7 +487,9 @@ function handlePhoneTouchEnd(e){
     let currentSlide = imagePositions[projectIndex];
 
     angleChecked = false
-    document.body.classList.remove("body__noscroll");
+    document.body.classList.remove("noscroll");
+    document.documentElement.classList.remove("noscroll");
+
     currentSlider.style.transition = "1000ms";
 
     if(currentSlide == 0){
