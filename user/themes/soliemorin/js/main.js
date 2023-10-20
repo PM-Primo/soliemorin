@@ -53,6 +53,20 @@ function lazyLoadNewProject(project){
     loadImg(slides[slides.length-1])
     loadImg(slides[1]);
     loadImg(slides[2]);
+
+    let projectIndex = nodes.indexOf(project);
+    if(projectIndex === 2){
+        lazyLoadNewProject(projects[projects.length -2])
+    }
+    if(projectIndex === 3){
+        lazyLoadNewProject(projects[projects.length -1])
+    }
+    if(projectIndex === projects.length - 4){
+        lazyLoadNewProject(projects[0])
+    }
+    if(projectIndex === projects.length - 3){
+        lazyLoadNewProject(projects[1])
+    }
 }
 
 lazyLoadNewProject(projects[2]);
@@ -60,8 +74,10 @@ lazyLoadNewProject(projects[2]);
 // Contrôles à la souris
 function addClickControls(){
     for(i = currentProject-2; i < currentProject+1; i++){
-        projects[i].classList.remove("current_project", "prev_project", "next_project");
-        projects[i].removeAttribute('onclick');
+        if(projects[i]){
+            projects[i].classList.remove("current_project", "prev_project", "next_project");
+            projects[i].removeAttribute('onclick');
+        }
     }
 
     projects[currentProject].classList.add("current_project");
@@ -226,16 +242,28 @@ function slideUp(){
         if(currentProject == 2){
             imagePositions[(projects.length - 2)]++;
             counters[(projects.length -2)].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+            if(currentSlide+2<slides.length-1){
+                loadImg(projects[projects.length-2].getElementsByClassName("slideshow__image")[currentSlide+2]);
+            }
         }
         else if(currentProject == 3){
             imagePositions[(projects.length - 1)]++;
+            if(currentSlide+2<slides.length-1){
+                loadImg(projects[projects.length-1].getElementsByClassName("slideshow__image")[currentSlide+2]);
+            }
         }
         if(currentProject == (projects.length - 3) ){
             imagePositions[1]++;
             counters[1].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+            if(currentSlide+2<slides.length-1){
+                loadImg(projects[1].getElementsByClassName("slideshow__image")[currentSlide+2]);
+            }
         }
         else if(currentProject == (projects.length - 4) ){
             imagePositions[0]++;
+            if(currentSlide+2<slides.length-1){
+                loadImg(projects[0].getElementsByClassName("slideshow__image")[currentSlide+2]);
+            }
         }
         if(currentSlide+2<slides.length-1){
             loadImg(slides[currentSlide+2]);
