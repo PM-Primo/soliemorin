@@ -23,13 +23,14 @@ let angle;
 let initWidth = window.innerWidth
 
 //AJOUT DES DIFFERENTS EVENTLISTENERS
-if(window.matchMedia("(min-width: 870px)").matches){
+if(window.matchMedia("(min-width: 1080px)").matches){
     if(window.matchMedia("(pointer: coarse)").matches){
         addTouchControls();
     }
     else{
         addClickControls();
     }
+    lazyLoadNewProject(projects[2]);
     window.addEventListener("keydown", checkKeyPressed, false);
     displayImages();
     displayCaptions();    
@@ -70,7 +71,6 @@ function lazyLoadNewProject(project){
     }
 }
 
-lazyLoadNewProject(projects[2]);
 
 // Contrôles à la souris
 function addClickControls(){
@@ -406,6 +406,9 @@ function handleTouchStart(e){
 }
 
 function handleMainTouchMove(e){
+
+    e.preventDefault();
+    
     xDelta = xStart-e.touches[0].clientX
     // xDelta : + si on slide vers la gauche / - si on slide vers la droite
 
@@ -494,7 +497,9 @@ function handlePhoneTouchMove(e){
 
     if(angleChecked){
         if(angle == "swipe"){
-            document.body.classList.add("noscroll");
+
+            e.preventDefault();
+
             if(xPhoneSliders[projectIndex]==0 && xDelta<0){
                 xStart = e.touches[0].clientX;
                 xDelta = 0;
@@ -515,7 +520,6 @@ function handlePhoneTouchEnd(e){
     let currentSlide = imagePositions[projectIndex];
 
     angleChecked = false
-    document.body.classList.remove("noscroll");
 
     currentSlider.style.transition = "1000ms";
 

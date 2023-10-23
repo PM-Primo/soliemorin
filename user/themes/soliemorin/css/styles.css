@@ -168,11 +168,11 @@ img {
 }
 
 .prev_project:hover{
-    cursor: url('../images/GAUCHE.svg'), pointer ;
+    cursor: url('../images/GAUCHE.png'), pointer ;
 }
 
 .next_project:hover{
-    cursor: url('../images/DROITE.svg'), pointer ;
+    cursor: url('../images/DROITE.png'), pointer ;
 }
 
 .slideshow__overlay{
@@ -326,10 +326,6 @@ img {
     color: var(--faded-blue);
 }
 
-.noscroll {
-    overflow: hidden;
-    position:relative;
-}
 
 /* INFORMATIONS SCROLLBAR */
 
@@ -363,7 +359,7 @@ img {
     }
 }
 
-@media screen and (max-width: 870px){
+@media screen and (max-width: 1080px){
 
     .header{
         height: auto;
@@ -446,11 +442,11 @@ img {
     }
     
     .overlay__right:hover{
-        cursor: url('../images/DROITE.svg'), auto ;
+        cursor: url('../images/DROITE.png'), auto ;
     }
 
     .overlay__left:hover{
-        cursor: url('../images/GAUCHE.svg'), auto ;
+        cursor: url('../images/GAUCHE.png'), auto ;
     }
 
     .overlay__neutral:hover{
