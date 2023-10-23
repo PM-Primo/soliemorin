@@ -36,6 +36,7 @@ if(window.matchMedia("(min-width: 870px)").matches){
 }
 else{
     if(window.matchMedia("(pointer: coarse)").matches){
+        lazyLoadPhoneInit();
         addPhoneControls();
     }
 }
@@ -454,7 +455,7 @@ function handleMainTouchEnd(e){
             currentProject++;
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
-            projects[currentProject]
+            lazyLoadNewProject(projects[currentProject])
         }
         else if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth/2)){
             currentProject--;
@@ -604,5 +605,13 @@ function loadImg(image){
     if(image.classList.contains("unloaded")){
         image.src = image.dataset.src;
         image.classList.remove("unloaded");
+    }
+}
+
+function lazyLoadPhoneInit(){
+    images = document.getElementsByClassName("unloaded");
+    images.setAttribute('loading','lazy');
+    for(i = 0; i < images.length - 1; i++){
+        loadImg(images[i])
     }
 }
