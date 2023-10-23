@@ -328,6 +328,7 @@ img {
 
 .noscroll {
     overflow: hidden;
+    position:relative;
 }
 
 /* INFORMATIONS SCROLLBAR */

@@ -495,7 +495,6 @@ function handlePhoneTouchMove(e){
     if(angleChecked){
         if(angle == "swipe"){
             document.body.classList.add("noscroll");
-            document.documentElement.classList.add("noscroll");
             if(xPhoneSliders[projectIndex]==0 && xDelta<0){
                 xStart = e.touches[0].clientX;
                 xDelta = 0;
@@ -517,7 +516,6 @@ function handlePhoneTouchEnd(e){
 
     angleChecked = false
     document.body.classList.remove("noscroll");
-    document.documentElement.classList.remove("noscroll");
 
     currentSlider.style.transition = "1000ms";
 
@@ -608,10 +606,12 @@ function loadImg(image){
     }
 }
 
+
 function lazyLoadPhoneInit(){
     images = document.getElementsByClassName("unloaded");
-    images.setAttribute('loading','lazy');
-    for(i = 0; i < images.length - 1; i++){
+    for(i = 0; i < images.length - 1; i+1){
+        images[i].setAttribute('loading','lazy');
         loadImg(images[i])
+        console.log(i)
     }
 }

@@ -13,7 +13,7 @@
                     {% for slide in project.header.custom.images %}
                         {% set imageUrl = (slide.image|first).name %}
                         {% if loop.index == 1 %}
-                            <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image" loading="lazy">
+                            <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image lazy" loading="lazy">
                         {% else %}
                             <img data-src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image unloaded">
                         {% endif %}
@@ -29,7 +29,7 @@
                         {% for slide in project.header.custom.images %}
                             {% set imageUrl = (slide.image|first).name %}
                             {% if loop.index == 1 %}
-                                <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image" loading="lazy">
+                                <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image lazy" loading="lazy">
                             {% else %}
                                 <img data-src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image unloaded">
                             {% endif %}
@@ -60,7 +60,7 @@
                         {% for slide in project.header.custom.images %}
                             {% set imageUrl = (slide.image|first).name %}
                             {% if loop.index == 1 %}
-                                <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image" loading="lazy">
+                                <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image lazy" loading="lazy">
                             {% else %}
                                 <img data-src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image unloaded">
                             {% endif %}
