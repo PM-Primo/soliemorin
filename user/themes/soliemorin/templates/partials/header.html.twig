@@ -25,8 +25,11 @@
 
     <div class="header">
         <h1 class="header__logo" onclick="reload()">Solie Morin</h1>
-        <a href="javascript:void(0);" onclick="displayInfos()" class="header__infos">Informations</a>
-        <img src="{{ url('theme://images/info.png') }}" onclick="displayInfos()" class="header__infos_icon" alt="Afficher les informations">
+        <div class="header__infos_icon_box">
+            <a href="javascript:void(0);" onclick="displayInfos()" class="header__infos">Informations</a>
+            <img src="{{ url('theme://images/INFOS.svg') }}" onclick="displayInfos()" class="header__infos_icon" alt="Afficher les informations">
+            <img src="{{ url('theme://images/INFOS_CLIQUE.svg') }}" onclick="displayInfos()" class="header__infos_icon_clicked" alt="Afficher les informations">
+        </div>
 
     </div>
 

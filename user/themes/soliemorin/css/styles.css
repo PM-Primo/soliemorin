@@ -111,6 +111,11 @@ img {
     display: none;
 }
 
+.header__infos_icon_clicked{
+    display: none;
+}
+
+
 .header__infos_icon:hover{
     cursor: url('../images/pointer.png'), pointer ;
     /* cursor:  pointer ; */
@@ -540,4 +545,17 @@ img {
     .header__infos_icon{
         display: block;
     }
+
+    .header__infos_icon_clicked{
+        display: none;
+    }
+
+    .header__infos_icon_box:hover .header__infos_icon{
+        display: none;
+    }
+
+    .header__infos_icon_box:hover .header__infos_icon_clicked{
+        display: block;
+    }
+    
 }
