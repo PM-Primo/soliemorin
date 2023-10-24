@@ -166,6 +166,8 @@ function displayCaptions(){
 // FONCTIONS DE DEFILEMENT - VERSION DESKTOP
 
 function slideRight(){
+
+
     if(currentProject < projects.length -3){
         posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
         currentProject++;
@@ -234,110 +236,125 @@ function slideLeft(){
 
 }
 
-function slideUp(){
+function slideUp(){    
+
     let project = projects[currentProject];
     let slides = project.getElementsByClassName("slideshow__image");
     let currentSlide = imagePositions[currentProject];
-    let counters = document.getElementsByClassName("caption__slides_counter");
 
-    if(currentSlide < slides.length-1){
-        imagePositions[currentProject]++;
-        counters[currentProject].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
-        if(currentProject == 2){
-            imagePositions[(projects.length - 2)]++;
-            counters[(projects.length -2)].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+    if(slides[currentSlide].complete && slides[currentSlide].naturalHeight !== 0){
+        let counters = document.getElementsByClassName("caption__slides_counter");
+
+        if(currentSlide < slides.length-1){
+            imagePositions[currentProject]++;
+            counters[currentProject].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+            if(currentProject == 2){
+                imagePositions[(projects.length - 2)]++;
+                counters[(projects.length -2)].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+                if(currentSlide+2<slides.length-1){
+                    loadImg(projects[projects.length-2].getElementsByClassName("slideshow__image")[currentSlide+2]);
+                }
+            }
+            else if(currentProject == 3){
+                imagePositions[(projects.length - 1)]++;
+                if(currentSlide+2<slides.length-1){
+                    loadImg(projects[projects.length-1].getElementsByClassName("slideshow__image")[currentSlide+2]);
+                }
+            }
+            if(currentProject == (projects.length - 3) ){
+                imagePositions[1]++;
+                counters[1].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+                if(currentSlide+2<slides.length-1){
+                    loadImg(projects[1].getElementsByClassName("slideshow__image")[currentSlide+2]);
+                }
+            }
+            else if(currentProject == (projects.length - 4) ){
+                imagePositions[0]++;
+                if(currentSlide+2<slides.length-1){
+                    loadImg(projects[0].getElementsByClassName("slideshow__image")[currentSlide+2]);
+                }
+            }
             if(currentSlide+2<slides.length-1){
-                loadImg(projects[projects.length-2].getElementsByClassName("slideshow__image")[currentSlide+2]);
+                loadImg(slides[currentSlide+2]);
             }
         }
-        else if(currentProject == 3){
-            imagePositions[(projects.length - 1)]++;
-            if(currentSlide+2<slides.length-1){
-                loadImg(projects[projects.length-1].getElementsByClassName("slideshow__image")[currentSlide+2]);
+        else{
+            imagePositions[currentProject] = 0;
+            counters[currentProject].innerHTML = "1/"+slides.length;
+            if(currentProject == 2){
+                imagePositions[(projects.length - 2)] = 0;
+                counters[(projects.length -2)].innerHTML = "1/"+slides.length;
+            }
+            else if(currentProject == 3){
+                imagePositions[(projects.length - 1)] = 0;
+            }
+            if(currentProject == (projects.length - 3) ){
+                imagePositions[1] = 0 ;
+                counters[1].innerHTML = "1/"+slides.length;
+            }
+            else if(currentProject == (projects.length - 4) ){
+                imagePositions[0] = 0;
             }
         }
-        if(currentProject == (projects.length - 3) ){
-            imagePositions[1]++;
-            counters[1].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
-            if(currentSlide+2<slides.length-1){
-                loadImg(projects[1].getElementsByClassName("slideshow__image")[currentSlide+2]);
-            }
-        }
-        else if(currentProject == (projects.length - 4) ){
-            imagePositions[0]++;
-            if(currentSlide+2<slides.length-1){
-                loadImg(projects[0].getElementsByClassName("slideshow__image")[currentSlide+2]);
-            }
-        }
-        if(currentSlide+2<slides.length-1){
-            loadImg(slides[currentSlide+2]);
-        }
+        displayImages();
     }
     else{
-        imagePositions[currentProject] = 0;
-        counters[currentProject].innerHTML = "1/"+slides.length;
-        if(currentProject == 2){
-            imagePositions[(projects.length - 2)] = 0;
-            counters[(projects.length -2)].innerHTML = "1/"+slides.length;
-        }
-        else if(currentProject == 3){
-            imagePositions[(projects.length - 1)] = 0;
-        }
-        if(currentProject == (projects.length - 3) ){
-            imagePositions[1] = 0 ;
-            counters[1].innerHTML = "1/"+slides.length;
-        }
-        else if(currentProject == (projects.length - 4) ){
-            imagePositions[0] = 0;
-        }
+        console.log("Le contenu n'a pas encore été chargé")
     }
-    displayImages();
+
+    
 }
 
 function slideDown(){ 
     let project = projects[currentProject];
     let slides = project.getElementsByClassName("slideshow__image")
     let currentSlide = imagePositions[currentProject];
-    let counters = document.getElementsByClassName("caption__slides_counter");
 
-    if(currentSlide > 0){
-        imagePositions[currentProject]--;
-        counters[currentProject].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
-        if(currentProject == 2){
-            imagePositions[(projects.length - 2)]--;
-            counters[(projects.length -2)].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+    if(slides[currentSlide].complete && slides[currentSlide].naturalHeight !== 0){
+
+        let counters = document.getElementsByClassName("caption__slides_counter");
+
+
+        if(currentSlide > 0){
+            imagePositions[currentProject]--;
+            counters[currentProject].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+            if(currentProject == 2){
+                imagePositions[(projects.length - 2)]--;
+                counters[(projects.length -2)].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+            }
+            else if(currentProject == 3){
+                imagePositions[(projects.length - 1)]--;
+            }
+            if(currentProject == (projects.length - 3) ){
+                imagePositions[1]--;
+                counters[1].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
+            }
+            else if(currentProject == (projects.length - 4) ){
+                imagePositions[0]--;
+            }
+            loadImg(slides[currentSlide-1]);
         }
-        else if(currentProject == 3){
-            imagePositions[(projects.length - 1)]--;
+        else{
+            imagePositions[currentProject] = slides.length-1;
+            counters[currentProject].innerHTML = slides.length+"/"+slides.length;
+            if(currentProject == 2){
+                imagePositions[(projects.length - 2)] = slides.length-1;
+                counters[(projects.length -2)].innerHTML = slides.length+"/"+slides.length;
+            }
+            else if(currentProject == 3){
+                imagePositions[(projects.length - 1)] = slides.length-1;
+            }
+            if(currentProject == (projects.length - 3) ){
+                imagePositions[1] = slides.length-1 ;
+                counters[1].innerHTML = slides.length+"/"+slides.length;
+            }
+            else if(currentProject == (projects.length - 4) ){
+                imagePositions[0] = slides.length-1;
+            }    
         }
-        if(currentProject == (projects.length - 3) ){
-            imagePositions[1]--;
-            counters[1].innerHTML = (imagePositions[currentProject]+1)+"/"+slides.length;
-        }
-        else if(currentProject == (projects.length - 4) ){
-            imagePositions[0]--;
-        }
-        loadImg(slides[currentSlide-1]);
+        displayImages();
     }
-    else{
-        imagePositions[currentProject] = slides.length-1;
-        counters[currentProject].innerHTML = slides.length+"/"+slides.length;
-        if(currentProject == 2){
-            imagePositions[(projects.length - 2)] = slides.length-1;
-            counters[(projects.length -2)].innerHTML = slides.length+"/"+slides.length;
-        }
-        else if(currentProject == 3){
-            imagePositions[(projects.length - 1)] = slides.length-1;
-        }
-        if(currentProject == (projects.length - 3) ){
-            imagePositions[1] = slides.length-1 ;
-            counters[1].innerHTML = slides.length+"/"+slides.length;
-        }
-        else if(currentProject == (projects.length - 4) ){
-            imagePositions[0] = slides.length-1;
-        }    
-    }
-    displayImages();
+
 }
 
 // FONCTIONS DE DEFILEMENT - RESPONSIVE NON TACTILE
@@ -432,7 +449,7 @@ function handleMainTouchEnd(e){
 
     // Cas où le slider est calé à gauche
     if(currentProject == 2){
-        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75)){
+        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75) && xDelta!=0){
             currentProject++;
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -447,7 +464,7 @@ function handleMainTouchEnd(e){
     }
     // Cas où le slider est calé à droite
     else if(currentProject == projects.length-3){
-        if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25)){
+        if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25) && xDelta!=0){
             currentProject--;
             projects[currentProject+1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -457,13 +474,13 @@ function handleMainTouchEnd(e){
     }
     // Tous les autres cas
     else{
-        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75)){
+        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75) && xDelta!=0){
             currentProject++;
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
             lazyLoadNewProject(projects[currentProject])
         }
-        else if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25)){
+        else if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25) && xDelta!=0){
             currentProject--;
             projects[currentProject+1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
