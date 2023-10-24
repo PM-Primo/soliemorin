@@ -559,3 +559,27 @@ img {
     }
     
 }
+
+@media screen and (max-height: 570px){
+    
+    h1{
+        font-size: 2.2rem;
+    }
+
+    .header__infos{
+        font-size: .8rem;
+    }
+
+    .caption__project, .caption__slides_counter {
+        font-size: .65rem;
+    }
+
+    .slideshow__container {
+        height: 80%;
+        margin-top: 0;
+    }
+
+    .caption__container {
+        height: 10%;
+    }
+}
