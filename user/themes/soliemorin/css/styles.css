@@ -34,7 +34,7 @@
     --smaller-font-size:.8rem;
     --captions-font-size: .9rem;
     --info-resp-font-size: .87rem;
-    
+
 }
 
 * {
@@ -63,12 +63,13 @@ body {
     height: 100%;
     background-color: var(--main-white);
     cursor: url('../images/cursor.png'), auto;
-
 }
+
 
 h1{
     font-family: var(--title-font);
     font-size: var(--h1-font-size);
+    font-weight: normal;
     text-transform: uppercase;
 }
 
@@ -79,13 +80,16 @@ img {
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
- }
+}
+
+/* BUG FIX 100vh sur APPLE */
+
 
 /* HEADER */
 
 .header{
     width: 100%;
-    height: 10vh;
+    height: 10%;
     padding: 0 1rem 0 1rem;
     display: flex;
     flex-direction: row;
@@ -100,6 +104,7 @@ img {
 .header__infos:hover{
     text-decoration: underline;
     cursor: url('../images/pointer.png'), pointer ;
+    /* cursor: pointer ; */
 }
 
 .header__infos_icon{
@@ -108,7 +113,7 @@ img {
 
 .header__infos_icon:hover{
     cursor: url('../images/pointer.png'), pointer ;
- 
+    /* cursor:  pointer ; */
 }
 
 .main__wrapper{
@@ -119,13 +124,14 @@ img {
 
 .header__logo:hover{
     cursor: url('../images/pointer.png'), pointer ;
+    /* cursor: pointer ; */
 }
 
 /* SLIDESHOW */
 
 
 .slideshow__container{
-    height:85vh;
+    height:85%;
     width: 100%;
     overflow: hidden;
     position: relative; 
@@ -149,13 +155,14 @@ img {
 .slideshow__project_inner{
     display: flex;
     flex-direction: column;
+    height: 100%;
     /* transition: 1000ms; */
 }
 
 .slideshow__image{
     object-fit: contain;
     width: auto;
-    height: 85vh;
+    height: 100%;
     display: none;
 }
 
@@ -165,14 +172,17 @@ img {
 
 .current_project:hover{
     cursor: url('../images/pointer.png'), pointer ;
+    /* cursor: pointer ; */
 }
 
 .prev_project:hover{
     cursor: url('../images/GAUCHE.png'), pointer ;
+    /* cursor: w-resize ; */
 }
 
 .next_project:hover{
     cursor: url('../images/DROITE.png'), pointer ;
+    /* cursor: e-resize ; */
 }
 
 .slideshow__overlay{
@@ -188,7 +198,7 @@ img {
 /* CAPTIONS */
 
 .caption__container{
-    height: 5vh;
+    height: 5%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -222,6 +232,7 @@ img {
     -webkit-text-stroke: 1px var(--main-white);
     text-stroke: 1px var(--main-white);
     cursor: url('../images/pointer.png'), pointer;
+    cursor: pointer;
 }
 
 .informations__close_icon{
@@ -234,6 +245,7 @@ img {
 
 .informations__close_icon_box:hover{
     cursor: url('../images/pointer.png'), auto ;
+    cursor: pointer ;
 }
 
 .informations__close_icon_box:hover .informations__close_icon{
@@ -323,6 +335,7 @@ img {
 
 .footer__link:hover{
     cursor: url('../images/pointer.png'), pointer;
+    /* cursor: pointer; */
     color: var(--faded-blue);
 }
 
@@ -443,10 +456,12 @@ img {
     
     .overlay__right:hover{
         cursor: url('../images/DROITE.png'), auto ;
+        /* cursor: e-resize ; */
     }
 
     .overlay__left:hover{
         cursor: url('../images/GAUCHE.png'), auto ;
+        /* cursor: w-resize ; */
     }
 
     .overlay__neutral:hover{

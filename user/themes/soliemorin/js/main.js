@@ -408,7 +408,7 @@ function handleTouchStart(e){
 function handleMainTouchMove(e){
 
     e.preventDefault();
-    
+
     xDelta = xStart-e.touches[0].clientX
     // xDelta : + si on slide vers la gauche / - si on slide vers la droite
 
@@ -429,7 +429,7 @@ function handleMainTouchEnd(e){
 
     // Cas où le slider est calé à gauche
     if(currentProject == 2){
-        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth/2)){
+        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75)){
             currentProject++;
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -444,7 +444,7 @@ function handleMainTouchEnd(e){
     }
     // Cas où le slider est calé à droite
     else if(currentProject == projects.length-3){
-        if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth/2)){
+        if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25)){
             currentProject--;
             projects[currentProject+1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -454,13 +454,13 @@ function handleMainTouchEnd(e){
     }
     // Tous les autres cas
     else{
-        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth/2)){
+        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75)){
             currentProject++;
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
             lazyLoadNewProject(projects[currentProject])
         }
-        else if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth/2)){
+        else if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25)){
             currentProject--;
             projects[currentProject+1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -524,7 +524,7 @@ function handlePhoneTouchEnd(e){
     currentSlider.style.transition = "1000ms";
 
     if(currentSlide == 0){
-        if(slides[currentSlide+1].getBoundingClientRect().left < (window.innerWidth/2)){
+        if(slides[currentSlide+1].getBoundingClientRect().left < (window.innerWidth*0.75)){
             imagePositions[projectIndex]++;
             currentSlide++;
             xPhoneSliders[projectIndex] = slides[(currentSlide)].offsetLeft - ((window.innerWidth-slides[(currentSlide)].offsetWidth)/2);
@@ -537,7 +537,7 @@ function handlePhoneTouchEnd(e){
         }
     }
     else if(currentSlide == slides.length-1){
-        if(slides[currentSlide-1].getBoundingClientRect().right > (window.innerWidth/2)){
+        if(slides[currentSlide-1].getBoundingClientRect().right > (window.innerWidth*0.25)){
             imagePositions[projectIndex]--;
             currentSlide--;
         }
@@ -545,11 +545,11 @@ function handlePhoneTouchEnd(e){
         currentSlider.style.transform = "translateX(-"+xPhoneSliders[projectIndex]+"px)";
     }
     else{
-        if(slides[currentSlide+1].getBoundingClientRect().left < (window.innerWidth/2)){
+        if(slides[currentSlide+1].getBoundingClientRect().left < (window.innerWidth*0.75)){
             imagePositions[projectIndex]++;
             currentSlide++;
         }
-        else if(slides[currentSlide-1].getBoundingClientRect().right > (window.innerWidth/2)){
+        else if(slides[currentSlide-1].getBoundingClientRect().right > (window.innerWidth*0.25)){
             imagePositions[projectIndex]--;
             currentSlide--;
         }
@@ -610,7 +610,6 @@ function loadImg(image){
     }
 }
 
-
 function lazyLoadPhoneInit(){
     images = document.getElementsByClassName("unloaded");
     for(i = 0; i < images.length - 1; i+1){
@@ -618,4 +617,4 @@ function lazyLoadPhoneInit(){
         loadImg(images[i])
         console.log(i)
     }
-}
+}  
