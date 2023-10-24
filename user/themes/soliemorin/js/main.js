@@ -19,11 +19,13 @@ let xDelta = 0;
 let angleChecked = false;
 let angle;
 
-// Variable pour le resize
+// Variables pour le resize
 let initWidth = window.innerWidth
+var doit;
+
 
 //AJOUT DES DIFFERENTS EVENTLISTENERS
-if(window.matchMedia("(min-width: 1080px)").matches){
+if(window.matchMedia("(min-aspect-ratio: 950/715)").matches){
     if(window.matchMedia("(pointer: coarse)").matches){
         addTouchControls();
     }
@@ -44,7 +46,8 @@ else{
 
 window.onresize = function(){ 
     if (window.innerWidth !== initWidth ) {
-        location.reload(); 
+        clearTimeout(doit);
+        doit = setTimeout(location.reload(), 100);
     }
 }
 
