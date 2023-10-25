@@ -16,6 +16,7 @@ let yStart = 0
 let xSlider = 0;
 let xPhoneSliders = Array(projects.length).fill(0)
 let xDelta = 0;
+let xDeltaSafety = 0;
 let angleChecked = false;
 let angle;
 
@@ -38,8 +39,8 @@ if(window.matchMedia("(min-aspect-ratio: 950/715)").matches){
     displayCaptions();    
 }
 else{
+    lazyLoadPhoneInit();
     if(window.matchMedia("(pointer: coarse)").matches){
-        lazyLoadPhoneInit();
         addPhoneControls();
     }
 }
@@ -423,6 +424,7 @@ function tabletClickLeft(e){
 function handleTouchStart(e){
     xStart = e.touches[0].clientX;
     yStart = e.touches[0].clientY;
+    xDeltaSafety = 0
 }
 
 function handleMainTouchMove(e){
@@ -430,6 +432,7 @@ function handleMainTouchMove(e){
     e.preventDefault();
 
     xDelta = xStart-e.touches[0].clientX
+    xDeltaSafety = xDelta
     // xDelta : + si on slide vers la gauche / - si on slide vers la droite
 
     projectSlider.style.transition = "none";
@@ -445,11 +448,13 @@ function handleMainTouchMove(e){
 
 function handleMainTouchEnd(e){
 
+    console.log(Math.abs(xDelta))
+
     projectSlider.style.transition = "1000ms";
 
     // Cas où le slider est calé à gauche
     if(currentProject == 2){
-        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75) && xDelta!=0){
+        if((projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75)) && (Math.abs(xDeltaSafety)>150)){
             currentProject++;
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -464,7 +469,7 @@ function handleMainTouchEnd(e){
     }
     // Cas où le slider est calé à droite
     else if(currentProject == projects.length-3){
-        if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25) && xDelta!=0){
+        if((projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25)) && (Math.abs(xDeltaSafety)>150)){
             currentProject--;
             projects[currentProject+1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -474,13 +479,13 @@ function handleMainTouchEnd(e){
     }
     // Tous les autres cas
     else{
-        if(projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75) && xDelta!=0){
+        if((projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75) && Math.abs(xDeltaSafety)>150)){
             currentProject++;
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
             lazyLoadNewProject(projects[currentProject])
         }
-        else if(projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25) && xDelta!=0){
+        else if((projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25) && Math.abs(xDeltaSafety)>150)){
             currentProject--;
             projects[currentProject+1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
