@@ -242,9 +242,19 @@ function slideLeft(){
 
 }
 
-function slideUp(){    
+
+function slideUp(){
 
     let project = projects[currentProject];
+
+    project.removeAttribute('onclick')
+    window.removeEventListener("keydown", checkKeyPressed, false);
+
+    setTimeout(() => {
+        project.setAttribute('onclick',"slideUp()" );
+        window.addEventListener("keydown", checkKeyPressed, false);
+    }, 200);
+
     let slides = project.getElementsByClassName("slideshow__image");
     let currentSlide = imagePositions[currentProject];
 
@@ -313,6 +323,15 @@ function slideUp(){
 
 function slideDown(){ 
     let project = projects[currentProject];
+
+    project.removeAttribute('onclick')
+    window.removeEventListener("keydown", checkKeyPressed, false);
+
+    setTimeout(() => {
+        project.setAttribute('onclick',"slideUp()" );
+        window.addEventListener("keydown", checkKeyPressed, false);
+    }, 200);
+
     let slides = project.getElementsByClassName("slideshow__image")
     let currentSlide = imagePositions[currentProject];
 
@@ -453,13 +472,11 @@ function handleMainTouchMove(e){
 
 function handleMainTouchEnd(e){
 
-    console.log(Math.abs(xDelta))
-
     projectSlider.style.transition = "1000ms";
 
     // Cas où le slider est calé à gauche
     if(currentProject == 2){
-        if((projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75)) && (Math.abs(xDeltaSafety)>150)){
+        if(xDeltaSafety>150){
             currentProject++;
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -476,7 +493,7 @@ function handleMainTouchEnd(e){
     }
     // Cas où le slider est calé à droite
     else if(currentProject == projects.length-3){
-        if((projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25)) && (Math.abs(xDeltaSafety)>150)){
+        if(xDeltaSafety<-150){
             currentProject--;
             projects[currentProject+1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -486,7 +503,7 @@ function handleMainTouchEnd(e){
     }
     // Tous les autres cas
     else{
-        if((projects[currentProject+1].getBoundingClientRect().left < (window.innerWidth*0.75) && Math.abs(xDeltaSafety)>150)){
+        if(xDeltaSafety>150){
             currentProject++;
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -494,7 +511,7 @@ function handleMainTouchEnd(e){
             loadImg(projects[currentProject+1].getElementsByClassName("slideshow__image")[0]);
 
         }
-        else if((projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25) && Math.abs(xDeltaSafety)>150)){
+        if(xDeltaSafety<-150){
             currentProject--;
             projects[currentProject+1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
@@ -673,3 +690,4 @@ function lazyLoadPhoneInit(){
         loadImg(images[i])
     }
 }
+
