@@ -178,8 +178,7 @@ function slideRight(){
         currentProject++;
         projectSlider.style.transform = "translateX(-"+posProject+"px)";
         lazyLoadNewProject(projects[currentProject]);
-        loadImg(projects[currentProject+1].getElementsByClassName("slideshow__image")[0])
-
+        loadImg(projects[currentProject+1].getElementsByClassName("slideshow__image")[0]);
     }
     else if(currentProject == projects.length -3){
         posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
@@ -467,6 +466,8 @@ function handleMainTouchEnd(e){
             xSlider = projects[(currentProject)].offsetLeft - ((window.innerWidth-projects[(currentProject)].offsetWidth)/2);
             projectSlider.style.transform = "translateX(-"+xSlider+"px)";
             lazyLoadNewProject(projects[currentProject]);
+            loadImg(projects[currentProject+1].getElementsByClassName("slideshow__image")[0]);
+
         }
         else{
             xSlider = 0;
@@ -490,6 +491,8 @@ function handleMainTouchEnd(e){
             projects[currentProject-1].removeAttribute('onclick')
             projects[currentProject].setAttribute('onclick', 'slideUp()')
             lazyLoadNewProject(projects[currentProject])
+            loadImg(projects[currentProject+1].getElementsByClassName("slideshow__image")[0]);
+
         }
         else if((projects[currentProject-1].getBoundingClientRect().right > (window.innerWidth*0.25) && Math.abs(xDeltaSafety)>150)){
             currentProject--;
