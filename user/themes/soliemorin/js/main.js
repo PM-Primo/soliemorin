@@ -34,6 +34,8 @@ if(window.matchMedia("(min-aspect-ratio: 950/715)").matches){
         addClickControls();
     }
     lazyLoadNewProject(projects[2]);
+    loadImg(projects[3].getElementsByClassName("slideshow__image")[0])
+    loadImg(projects[4].getElementsByClassName("slideshow__image")[0])
     window.addEventListener("keydown", checkKeyPressed, false);
     displayImages();
     displayCaptions();    
@@ -56,11 +58,14 @@ window.onresize = function(){
 
 function lazyLoadNewProject(project){
     slides = project.getElementsByClassName("slideshow__image");
+    let projectIndex = nodes.indexOf(project);
+
+    loadImg(slides[0])
     loadImg(slides[slides.length-1])
     loadImg(slides[1]);
     loadImg(slides[2]);
+    
 
-    let projectIndex = nodes.indexOf(project);
     if(projectIndex === 2){
         lazyLoadNewProject(projects[projects.length -2])
     }
@@ -168,12 +173,13 @@ function displayCaptions(){
 
 function slideRight(){
 
-
     if(currentProject < projects.length -3){
         posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);
         currentProject++;
         projectSlider.style.transform = "translateX(-"+posProject+"px)";
         lazyLoadNewProject(projects[currentProject]);
+        loadImg(projects[currentProject+1].getElementsByClassName("slideshow__image")[0])
+
     }
     else if(currentProject == projects.length -3){
         posProject = projects[(currentProject+1)].offsetLeft - ((window.innerWidth-projects[(currentProject+1)].offsetWidth)/2);

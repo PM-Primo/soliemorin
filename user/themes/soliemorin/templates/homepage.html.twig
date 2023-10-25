@@ -12,11 +12,7 @@
                 <div class="slideshow__project_inner">
                     {% for slide in project.header.custom.images %}
                         {% set imageUrl = (slide.image|first).name %}
-                        {% if loop.index == 1 %}
-                            <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image lazy" loading="lazy">
-                        {% else %}
-                            <img data-src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image unloaded">
-                        {% endif %}
+                        <img data-src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image unloaded">
                     {% endfor %}
                 </div>
             </div>
@@ -28,11 +24,7 @@
                     <div class="slideshow__project_inner">
                         {% for slide in project.header.custom.images %}
                             {% set imageUrl = (slide.image|first).name %}
-                            {% if loop.index == 1 %}
-                                <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image lazy" loading="lazy">
-                            {% else %}
-                                <img data-src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image unloaded">
-                            {% endif %}
+                            <img data-src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image unloaded">
                         {% endfor %}
                     </div>
                     <div class="slideshow__overlay">
@@ -59,11 +51,7 @@
                     <div class="slideshow__project_inner">
                         {% for slide in project.header.custom.images %}
                             {% set imageUrl = (slide.image|first).name %}
-                            {% if loop.index == 1 %}
-                                <img src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image lazy" loading="lazy">
-                            {% else %}
-                                <img data-src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image unloaded">
-                            {% endif %}
+                            <img data-src="{{project.media[imageUrl].url(false)}}" alt="{{slide.alt}}" class="slideshow__image unloaded">
                         {% endfor %}
                     </div>
                 </div>
