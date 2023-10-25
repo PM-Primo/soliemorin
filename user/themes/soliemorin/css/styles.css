@@ -251,12 +251,15 @@ img {
     cursor: pointer ;
 }
 
-.informations__close_icon_box:hover .informations__close_icon{
-    display: none;
-}
 
-.informations__close_icon_box:hover .informations__close_icon_hovered{
-    display: block;
+@media(hover: hover){
+    .informations__close_icon_box:hover .informations__close_icon{
+        display: none;
+    }
+    
+    .informations__close_icon_box:hover .informations__close_icon_hovered{
+        display: block;
+    }
 }
 
 .informations__container{
@@ -551,7 +554,10 @@ img {
     .header__infos_icon_clicked{
         display: none;
     }
+    
+}
 
+@media(hover: hover) and (max-width: 500px){
     .header__infos_icon_box:hover .header__infos_icon{
         display: none;
     }
@@ -559,7 +565,6 @@ img {
     .header__infos_icon_box:hover .header__infos_icon_clicked{
         display: block;
     }
-    
 }
 
 @media screen and (max-height: 570px){
@@ -584,4 +589,15 @@ img {
     .caption__container {
         height: 10%;
     }
+}
+
+
+/*Affichage des boutons au clic*/
+
+.displayed{
+    display: block;
+}
+
+.hidden{
+    display: none;
 }

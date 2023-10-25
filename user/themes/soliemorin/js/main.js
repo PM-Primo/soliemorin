@@ -609,15 +609,37 @@ function checkAngle(x1, y1, x2, y2){
 // AFFICHAGE DES INFORMATIONS
 
 function displayInfos(){
+    if(window.matchMedia("(max-width:500px)").matches){
+        iconHoverAdd("i");
+    }
+    iconHoverRemove("x");
     let infoBox = document.getElementById("informations__container");
     infoBox.classList.add("informations__on");
     document.body.classList.add("body__noscroll");
 }
 
 function removeInfos(){
+    if(window.matchMedia("(max-width:500px)").matches){
+        iconHoverRemove("i");
+    }
+    iconHoverAdd("x");
     let infoBox = document.getElementById("informations__container");
     infoBox.classList.remove("informations__on");
     document.body.classList.remove("body__noscroll");
+}
+
+function iconHoverAdd(icon){
+    let mainIcon = document.getElementById(icon+"_icon");
+    let hoveredIcon = document.getElementById(icon+"_icon_hovered");
+    mainIcon.classList.add("hidden")
+    hoveredIcon.classList.add("displayed")
+}
+
+function iconHoverRemove(icon){
+    let mainIcon = document.getElementById(icon+"_icon");
+    let hoveredIcon = document.getElementById(icon+"_icon_hovered");
+    hoveredIcon.classList.remove("displayed")
+    mainIcon.classList.remove("hidden")
 }
 
 //RELOAD
@@ -640,6 +662,5 @@ function lazyLoadPhoneInit(){
     for(i = 0; i < images.length - 1; i+1){
         images[i].setAttribute('loading','lazy');
         loadImg(images[i])
-        console.log(i)
     }
-}  
+}
