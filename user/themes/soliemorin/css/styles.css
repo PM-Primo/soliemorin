@@ -342,6 +342,10 @@ img {
     color: var(--faded-blue);
 }
 
+.body__noscroll{
+    overflow: hidden;
+}
+
 
 /* INFORMATIONS SCROLLBAR */
 
