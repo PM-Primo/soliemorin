@@ -146,10 +146,6 @@ function displayImages(){
     for(i = 0; i < projects.length; i++){
         let slides = projects[i].getElementsByClassName("slideshow__image");
         for(j=0; j < slides.length; j++){
-            if(i==2){
-                console.log(j);
-                console.log(imagePositions[i])
-            }
             if(j == imagePositions[i]){
                 slides[j].style.display = "block"
             }
@@ -305,8 +301,6 @@ function slideUp(){
             }
             else{
                 imagePositions[currentProject] = 0;
-                console.log(currentProject)
-                console.log(imagePositions)
                 counters[currentProject].innerHTML = "1/"+slides.length;
                 if(currentProject == 2){
                     imagePositions[(projects.length - 2)] = 0;
@@ -324,6 +318,9 @@ function slideUp(){
                 }
             }
             displayImages();
+        }
+        else{
+            console.log("Le contenu suivant n'est pas encore chargé")
         }
     }
     else{
